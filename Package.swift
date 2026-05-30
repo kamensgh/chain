@@ -16,7 +16,9 @@ let package = Package(
                 "Info.plist",
                 "Assets.xcassets",
                 "Views",
-                "ContentView.swift"
+                "ContentView.swift",
+                "Models/Habit.swift",
+                "Models/HabitEntry.swift"
             ],
             sources: ["Domain", "Connectors", "Models"]
         ),

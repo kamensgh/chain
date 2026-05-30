@@ -29,16 +29,42 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
 
-  ChainTests:
+  ChainTests_iOS_Runner:
     type: bundle.unit-test
-    platform: [iOS, macOS]
+    platform: iOS
     sources:
       - path: ChainTests
     dependencies:
       - target: Chain_iOS
-        platformFilter: ios
-      - target: Chain_macOS
-        platformFilter: macos
     settings:
       base:
         SWIFT_VERSION: "5.9"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: NO
+
+  ChainTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: ChainTests
+    dependencies:
+      - target: Chain_macOS
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGNING_REQUIRED: NO
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Chain.app/Contents/MacOS/Chain"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
+schemes:
+  Chain_macOS:
+    build:
+      targets:
+        Chain_macOS: all
+        ChainTests: [test]
+    test:
+      targets:
+        - ChainTests
