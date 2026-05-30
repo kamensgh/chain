@@ -7,8 +7,7 @@ struct ChainApp: App {
 
     init() {
         do {
-            // Task 3: replace Schema([]) with ModelContainer(for: Habit.self, HabitEntry.self)
-            container = try ModelContainer(for: Schema([]))
+            container = try ModelContainer(for: Habit.self, HabitEntry.self)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }

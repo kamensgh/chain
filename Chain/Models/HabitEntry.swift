@@ -1,0 +1,32 @@
+import SwiftData
+import Foundation
+
+@Model
+final class HabitEntry {
+    @Attribute(.unique) var id: UUID
+    var periodStart: Date
+    var statusRaw: String
+    var verifMethodRaw: String
+    var value: Double?
+    var screenshotPath: String?
+    var verifiedAt: Date?
+    var habit: Habit?
+
+    var status: EntryStatus {
+        get { EntryStatus(rawValue: statusRaw) ?? .pending }
+        set { statusRaw = newValue.rawValue }
+    }
+
+    var verifMethod: VerifMethod {
+        get { VerifMethod(rawValue: verifMethodRaw) ?? .manual }
+        set { verifMethodRaw = newValue.rawValue }
+    }
+
+    init(habit: Habit, periodStart: Date) {
+        self.id = UUID()
+        self.periodStart = periodStart
+        self.statusRaw = EntryStatus.pending.rawValue
+        self.verifMethodRaw = VerifMethod.manual.rawValue
+        self.habit = habit
+    }
+}
