@@ -7,7 +7,7 @@ final class Companion {
     @Attribute(.unique) var id: UUID
     var typeRaw: String
     var xp: Double
-    var accessoriesUnlocked: [String]   // PetStage raw values that have been passed through
+    var accessoriesUnlocked: [String]   // PetStage raw values the companion has reached (never shrinks)
     var createdAt: Date
 
     var companionType: CompanionType {
@@ -28,7 +28,7 @@ final class Companion {
     @discardableResult
     func applyXP(_ delta: Double) -> PetStage? {
         let oldStage = CompanionEngine.stage(xp: xp)
-        xp = max(CompanionEngine.stage(xp: xp).xpFloor, xp + delta)
+        xp = max(oldStage.xpFloor, xp + delta)
         let newStage = CompanionEngine.stage(xp: xp)
         if newStage != oldStage && !accessoriesUnlocked.contains(newStage.rawValue) {
             accessoriesUnlocked.append(newStage.rawValue)
