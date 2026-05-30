@@ -9,6 +9,7 @@ final class Companion {
     var xp: Double
     var accessoriesUnlocked: [String]   // PetStage raw values the companion has reached (never shrinks)
     var createdAt: Date
+    var lastXPDate: Date?
 
     var companionType: CompanionType {
         get { CompanionType(rawValue: typeRaw) ?? .pet }

@@ -91,7 +91,7 @@ struct CompanionCardView: View {
                     .offset(y: phase ? -4 : 4)
                     .colorMultiply(state == .sick ? Color(white: 0.55) : .white)
                     .overlay(alignment: .topTrailing) {
-                        if let accessory = stage.accessoryEmoji {
+                        if companionType != .trophyRoom, let accessory = stage.accessoryEmoji {
                             Text(accessory)
                                 .font(.system(size: 26))
                                 .offset(x: 6, y: -6)
