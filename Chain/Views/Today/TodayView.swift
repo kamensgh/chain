@@ -1,0 +1,88 @@
+import SwiftUI
+import SwiftData
+
+struct TodayView: View {
+    @Query(sort: \Habit.createdAt) private var habits: [Habit]
+    @Environment(\.modelContext) private var context
+
+    private var doneCount: Int {
+        habits.filter { habit in
+            let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
+            return habit.entries.contains { $0.periodStart == period && $0.status == .verified }
+        }.count
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // Greeting + progress
+                VStack(alignment: .leading, spacing: 6) {
+                    Text(greetingText)
+                        .font(.title2.bold())
+                    if !habits.isEmpty {
+                        Text("\(doneCount) of \(habits.count) done today")
+                            .foregroundStyle(.secondary)
+                        GeometryReader { geo in
+                            ZStack(alignment: .leading) {
+                                Capsule()
+                                    .fill(Color.secondary.opacity(0.2))
+                                    .frame(height: 8)
+                                Capsule()
+                                    .fill(Color.accentColor)
+                                    .frame(
+                                        width: geo.size.width * (Double(doneCount) / Double(habits.count)),
+                                        height: 8
+                                    )
+                                    .animation(.spring(response: 0.4), value: doneCount)
+                            }
+                        }
+                        .frame(height: 8)
+                    }
+                }
+
+                // Habit list
+                if habits.isEmpty {
+                    ContentUnavailableView(
+                        "No habits yet",
+                        systemImage: "target",
+                        description: Text("Go to Habits to add your first one.")
+                    )
+                    .frame(maxWidth: .infinity)
+                } else {
+                    ForEach(habits) { habit in
+                        HabitRowView(habit: habit) {
+                            verify(habit: habit)
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+        .navigationTitle("Today")
+    }
+
+    private var greetingText: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 0..<12: return "Good morning! ☀️"
+        case 12..<17: return "Good afternoon! 🌤️"
+        default:      return "Good evening! 🌙"
+        }
+    }
+
+    private func verify(habit: Habit) {
+        let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
+        if let existing = habit.entries.first(where: { $0.periodStart == period }) {
+            existing.status = .verified
+            existing.verifMethod = .manual
+            existing.verifiedAt = Date()
+        } else {
+            let entry = HabitEntry(habit: habit, periodStart: period)
+            entry.status = .verified
+            entry.verifMethod = .manual
+            entry.verifiedAt = Date()
+            context.insert(entry)
+        }
+        try? context.save()
+    }
+}
