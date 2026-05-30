@@ -3,6 +3,7 @@ import SwiftData
 
 struct TodayView: View {
     @Query(sort: \Habit.createdAt) private var habits: [Habit]
+    @Query private var companions: [Companion]
     @Environment(\.modelContext) private var context
 
     private var doneCount: Int {
@@ -38,6 +39,11 @@ struct TodayView: View {
                         }
                         .frame(height: 8)
                     }
+                }
+
+                // Companion card
+                if let companion = companions.first {
+                    CompanionCardView(companion: companion, habits: habits)
                 }
 
                 // Habit list
