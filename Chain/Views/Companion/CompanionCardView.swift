@@ -18,8 +18,8 @@ struct CompanionCardView: View {
         }
     }
 
-    private var overallState: NeedState {
-        let states = activePairs.map { $0.state }
+    private func overallStateFrom(_ pairs: [NeedPair]) -> NeedState {
+        let states = pairs.map { $0.state }
         if states.contains(.sick)     { return .sick }
         if states.contains(.starving) { return .starving }
         if states.contains(.hungry)   { return .hungry }
@@ -65,13 +65,15 @@ struct CompanionCardView: View {
     // MARK: - Body
 
     var body: some View {
-        VStack(spacing: 14) {
-            characterSection
+        let pairs = activePairs
+        let state = overallStateFrom(pairs)
+        return VStack(spacing: 14) {
+            characterSectionFor(state: state)
             if companionType == .trophyRoom {
                 trophySection
             } else {
                 xpBarSection
-                needIndicatorsSection
+                needIndicatorsSectionFor(pairs: pairs, state: state)
                 growthPromptSection
             }
         }
@@ -81,13 +83,13 @@ struct CompanionCardView: View {
 
     // MARK: - Subviews
 
-    private var characterSection: some View {
+    private func characterSectionFor(state: NeedState) -> some View {
         PhaseAnimator([false, true]) { phase in
             ZStack(alignment: .topTrailing) {
                 Text(characterEmoji)
                     .font(.system(size: 72))
                     .offset(y: phase ? -4 : 4)
-                    .colorMultiply(overallState == .sick ? Color(white: 0.55) : .white)
+                    .colorMultiply(state == .sick ? Color(white: 0.55) : .white)
                     .overlay(alignment: .topTrailing) {
                         if let accessory = stage.accessoryEmoji {
                             Text(accessory)
@@ -96,7 +98,7 @@ struct CompanionCardView: View {
                         }
                     }
 
-                if overallState == .sick {
+                if state == .sick {
                     Text("🤒")
                         .font(.system(size: 26))
                         .offset(x: -2, y: -8)
@@ -132,11 +134,13 @@ struct CompanionCardView: View {
         }
     }
 
-    private var needIndicatorsSection: some View {
+    private func needIndicatorsSectionFor(pairs: [NeedPair], state: NeedState) -> some View {
         HStack(spacing: 20) {
-            ForEach(activePairs) { pair in
+            ForEach(pairs) { pair in
                 VStack(spacing: 4) {
-                    Text(pair.state == .fed ? "✅" : pair.state == .sick ? "🤒" : pair.need.petEmoji)
+                    Text(pair.state == .fed ? "✅" : pair.state == .sick ? "🤒"
+                         : companionType == .garden ? pair.need.gardenEmoji
+                         : pair.need.petEmoji)
                         .font(.title3)
                     Text(companionType == .garden ? pair.need.gardenLabel : pair.need.petLabel)
                         .font(.caption2)
