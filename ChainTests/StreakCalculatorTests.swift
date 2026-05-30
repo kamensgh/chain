@@ -1,6 +1,6 @@
 import Testing
 import Foundation
-@testable import Chain
+@testable import ChainDomain
 
 struct StreakCalculatorTests {
 
