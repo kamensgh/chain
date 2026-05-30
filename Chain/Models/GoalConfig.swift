@@ -18,4 +18,8 @@ struct GoalConfig: Codable {
     static func minutes(_ count: Double) -> GoalConfig {
         GoalConfig(unit: .minutes, targetValue: count, customLabel: "")
     }
+
+    static func custom(label: String, target: Double) -> GoalConfig {
+        GoalConfig(unit: .custom, targetValue: target, customLabel: label)
+    }
 }
