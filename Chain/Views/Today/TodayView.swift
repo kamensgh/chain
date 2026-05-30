@@ -89,6 +89,20 @@ struct TodayView: View {
             entry.verifiedAt = Date()
             context.insert(entry)
         }
+        applyDailyXP()
         try? context.save()
+    }
+
+    private func applyDailyXP() {
+        guard let companion = companions.first else { return }
+        let needStates: [NeedState] = CompanionNeed.allCases.prefix(min(habits.count, 3)).map { need in
+            let habit = habits[need.rawValue]
+            let entries = habit.entries.map { StreakEntry(periodStart: $0.periodStart, status: $0.status) }
+            return CompanionEngine.needState(for: need, entries: entries, frequency: habit.frequency, now: Date())
+        }
+        let delta = CompanionEngine.xpDelta(needStates: needStates)
+        if delta > 0 {
+            companion.applyXP(delta)
+        }
     }
 }
