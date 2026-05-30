@@ -65,6 +65,25 @@ struct TodayView: View {
             .padding()
         }
         .navigationTitle("Today")
+        .task { await verifyAll() }
+        .refreshable { await verifyAll() }
+    }
+
+    private func verifyAll() async {
+        await withTaskGroup(of: Void.self) { group in
+            for habit in habits {
+                guard habit.connectorType != .manual,
+                      habit.connectorType != .screenshot else { continue }
+                let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
+                let alreadyDone = habit.entries.contains {
+                    $0.periodStart == period && $0.status == .verified
+                }
+                guard !alreadyDone else { continue }
+                group.addTask {
+                    await ConnectorService.shared.verify(habit: habit, context: context)
+                }
+            }
+        }
     }
 
     private var greetingText: String {
