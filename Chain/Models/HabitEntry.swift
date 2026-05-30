@@ -9,6 +9,7 @@ final class HabitEntry {
     var verifMethodRaw: String
     var value: Double?
     var screenshotPath: String?
+    var sourceLabel: String?
     var verifiedAt: Date?
     var habit: Habit?
 
