@@ -21,6 +21,9 @@ targets:
         CFBundleVersion: "1"
         UILaunchScreen:
           UIColorName: ""
+        NSHealthShareUsageDescription: "Chain reads health data to automatically verify your fitness habits."
+        NSPhotoLibraryUsageDescription: "Chain saves a screenshot as proof that you completed your habit."
+        NSCameraUsageDescription: "Chain lets you take a photo as proof that you completed your habit."
     settings:
       base:
         SWIFT_VERSION: "5.9"
@@ -28,6 +31,7 @@ targets:
         CODE_SIGN_STYLE: Automatic
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        CODE_SIGN_ENTITLEMENTS: Chain/Chain.entitlements
 
   ChainTests_iOS_Runner:
     type: bundle.unit-test
