@@ -1,3 +1,4 @@
+// Chain/ChainApp.swift
 import SwiftUI
 import SwiftData
 
@@ -7,7 +8,7 @@ struct ChainApp: App {
 
     init() {
         do {
-            container = try ModelContainer(for: Habit.self, HabitEntry.self)
+            container = try ModelContainer(for: Habit.self, HabitEntry.self, Companion.self)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
@@ -17,6 +18,18 @@ struct ChainApp: App {
         WindowGroup {
             ContentView()
                 .modelContainer(container)
+                .task { await ensureCompanionExists() }
+        }
+    }
+
+    @MainActor
+    private func ensureCompanionExists() async {
+        let context = container.mainContext
+        let descriptor = FetchDescriptor<Companion>()
+        let count = (try? context.fetchCount(descriptor)) ?? 0
+        if count == 0 {
+            context.insert(Companion())
+            try? context.save()
         }
     }
 }

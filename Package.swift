@@ -18,7 +18,8 @@ let package = Package(
                 "Views",
                 "ContentView.swift",
                 "Models/Habit.swift",
-                "Models/HabitEntry.swift"
+                "Models/HabitEntry.swift",
+                "Models/Companion.swift"
             ],
             sources: ["Domain", "Connectors", "Models"]
         ),
