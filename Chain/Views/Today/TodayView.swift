@@ -79,6 +79,7 @@ struct TodayView: View {
     private func verify(habit: Habit) {
         let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
         if let existing = habit.entries.first(where: { $0.periodStart == period }) {
+            guard existing.status != .verified else { return }
             existing.status = .verified
             existing.verifMethod = .manual
             existing.verifiedAt = Date()
