@@ -44,4 +44,16 @@ struct HabitSchedulerTests {
         let old = StreakEntry(periodStart: yesterday, status: .verified)
         #expect(HabitScheduler.entry(for: .daily, entries: [entry, old], on: Date())?.periodStart == today)
     }
+
+    @Test func entryForTodayReturnsNilWhenNoMatch() {
+        let yesterday = cal.date(byAdding: .day, value: -1, to: cal.startOfDay(for: Date()))!
+        let old = StreakEntry(periodStart: yesterday, status: .verified)
+        #expect(HabitScheduler.entry(for: .daily, entries: [old], on: Date()) == nil)
+    }
+
+    @Test func isDueTrueWhenEntryIsSkipped() {
+        let today = cal.startOfDay(for: Date())
+        let entry = StreakEntry(periodStart: today, status: .skipped)
+        #expect(HabitScheduler.isDue(frequency: .daily, entries: [entry], on: Date()) == true)
+    }
 }
