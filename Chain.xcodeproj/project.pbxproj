@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2AA632C275FE0BE7E16E5D40 /* ChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1513C88D02180C028287D6 /* ChainTests.swift */; };
+		68EA2B68F9BFBA5B38605A74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11A1CAA2B8678E83C6EE720B /* Assets.xcassets */; };
 		6F499542D723E7054338FADD /* ChainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1A5E64A16187982432F0F /* ChainApp.swift */; };
 		AC8476CC1F11D511CC92E468 /* ChainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1A5E64A16187982432F0F /* ChainApp.swift */; };
 		CC27D6580B9788FAD6B4D487 /* ChainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA1513C88D02180C028287D6 /* ChainTests.swift */; };
+		F635BFCA5370D1F0B7636709 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11A1CAA2B8678E83C6EE720B /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,7 @@
 /* Begin PBXFileReference section */
 		024E190EF73B099D5DBF31EB /* ChainTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ChainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DEA18CE42E07E855C930622 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		11A1CAA2B8678E83C6EE720B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E2D604CE4DD180FA4032D5C /* .gitkeep */ = {isa = PBXFileReference; path = .gitkeep; sourceTree = "<group>"; };
 		2EB48A7F4A1A26F0392F3848 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61220B47D78BEE25F01A0D27 /* Chain.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +130,7 @@
 		BF67769B41B0064B44FE27EB /* Chain */ = {
 			isa = PBXGroup;
 			children = (
+				11A1CAA2B8678E83C6EE720B /* Assets.xcassets */,
 				C4A1A5E64A16187982432F0F /* ChainApp.swift */,
 				F53D724E60D8D743496B4EF6 /* Connectors */,
 				85FF803429A3525081D4AAC0 /* Domain */,
@@ -178,6 +182,7 @@
 			buildConfigurationList = F384AFC7EB386121BB9BCA5F /* Build configuration list for PBXNativeTarget "Chain_iOS" */;
 			buildPhases = (
 				1B2A6A7158F0E4F3E7B88C0C /* Sources */,
+				485FB6789785C038E37EADA0 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -214,6 +219,7 @@
 			buildConfigurationList = 16FBB52BD5D2B18D672A5C13 /* Build configuration list for PBXNativeTarget "Chain_macOS" */;
 			buildPhases = (
 				8AFF03AC718B57783B277C49 /* Sources */,
+				0FFF30E716AB65C34E7DB1B8 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -285,6 +291,25 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0FFF30E716AB65C34E7DB1B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68EA2B68F9BFBA5B38605A74 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		485FB6789785C038E37EADA0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F635BFCA5370D1F0B7636709 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1B2A6A7158F0E4F3E7B88C0C /* Sources */ = {

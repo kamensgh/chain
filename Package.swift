@@ -11,9 +11,14 @@ let package = Package(
         .target(
             name: "ChainDomain",
             path: "Chain",
-            exclude: ["ChainApp.swift", "Info.plist", "Assets.xcassets"],
-            sources: ["Domain", "Connectors", "Models"],
-            swiftSettings: [.unsafeFlags([])]
+            exclude: [
+                "ChainApp.swift",
+                "Info.plist",
+                "Assets.xcassets",
+                "Views",
+                "ContentView.swift"
+            ],
+            sources: ["Domain", "Connectors", "Models"]
         ),
         .testTarget(
             name: "ChainDomainTests",
