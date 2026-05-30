@@ -15,6 +15,7 @@ struct ChainApp: App {
 
     var body: some Scene {
         WindowGroup {
+            // TODO: Task 7 — replace with ContentView()
             Text("Chain")
                 .modelContainer(container)
         }

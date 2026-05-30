@@ -10,12 +10,16 @@ final class Habit {
     var frequencyRaw: String
     var goalConfigData: Data
     var connectorTypeRaw: String
-    var connectorEndpoint: String?      // MCP URL, stored in model (non-sensitive)
+    var connectorEndpoint: String?
     var reminderTime: Date?
     var gracePeriodEnabled: Bool
     var createdAt: Date
 
-    @Relationship(deleteRule: .cascade) var entries: [HabitEntry] = []
+    @Relationship(deleteRule: .cascade, inverse: \HabitEntry.habit)
+    var entries: [HabitEntry] = []
+
+    private static let decoder = JSONDecoder()
+    private static let encoder = JSONEncoder()
 
     var frequency: Frequency {
         get { Frequency(rawValue: frequencyRaw) ?? .daily }
@@ -23,8 +27,13 @@ final class Habit {
     }
 
     var goalConfig: GoalConfig {
-        get { (try? JSONDecoder().decode(GoalConfig.self, from: goalConfigData)) ?? .boolean }
-        set { goalConfigData = (try? JSONEncoder().encode(newValue)) ?? Data() }
+        get { (try? Self.decoder.decode(GoalConfig.self, from: goalConfigData)) ?? .boolean }
+        set {
+            goalConfigData = (try? Self.encoder.encode(newValue)) ?? {
+                assertionFailure("GoalConfig encoding failed — check Codable conformance")
+                return Data()
+            }()
+        }
     }
 
     var connectorType: ConnectorType {
@@ -38,7 +47,10 @@ final class Habit {
         self.emoji = emoji
         self.colorHex = ""
         self.frequencyRaw = frequency.rawValue
-        self.goalConfigData = (try? JSONEncoder().encode(goalConfig)) ?? Data()
+        self.goalConfigData = (try? JSONEncoder().encode(goalConfig)) ?? {
+            assertionFailure("GoalConfig encoding failed in Habit.init")
+            return Data()
+        }()
         self.connectorTypeRaw = ConnectorType.manual.rawValue
         self.gracePeriodEnabled = false
         self.createdAt = Date()
