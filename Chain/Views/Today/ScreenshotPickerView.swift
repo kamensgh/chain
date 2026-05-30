@@ -73,12 +73,14 @@ struct ScreenshotPickerView: View {
             existing.status = .verified
             existing.verifMethod = .screenshot
             existing.screenshotPath = fileURL.path
+            existing.sourceLabel = "Screenshot"
             existing.verifiedAt = Date()
         } else {
             let entry = HabitEntry(habit: habit, periodStart: period)
             entry.status = .verified
             entry.verifMethod = .screenshot
             entry.screenshotPath = fileURL.path
+            entry.sourceLabel = "Screenshot"
             entry.verifiedAt = Date()
             context.insert(entry)
         }
