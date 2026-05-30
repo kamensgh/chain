@@ -1,8 +1,11 @@
 import SwiftUI
+import SwiftData
 
 struct HabitRowView: View {
     let habit: Habit
     let onVerify: () -> Void
+
+    @State private var showingScreenshotPicker = false
 
     private var currentPeriodStart: Date {
         HabitScheduler.periodStart(for: habit.frequency, on: Date())
@@ -39,13 +42,19 @@ struct HabitRowView: View {
                     .font(.title3)
             }
 
-            // Name + status
+            // Name + status + source label
             VStack(alignment: .leading, spacing: 3) {
                 Text(habit.name)
                     .font(.subheadline.weight(.semibold))
                 Text(statusLabel)
                     .font(.caption)
                     .foregroundStyle(isVerified ? .green : .secondary)
+                if let entry = currentEntry, isVerified, entry.verifMethod == .auto,
+                   let label = entry.sourceLabel {
+                    Text(label)
+                        .font(.caption2)
+                        .foregroundStyle(.tertiary)
+                }
             }
 
             Spacer()
@@ -65,6 +74,15 @@ struct HabitRowView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.title2)
                     .foregroundStyle(Color.accentColor)
+            } else if habit.connectorType == .screenshot {
+                Button {
+                    showingScreenshotPicker = true
+                } label: {
+                    Image(systemName: "camera.circle")
+                        .font(.title2)
+                        .foregroundStyle(Color.accentColor)
+                }
+                .buttonStyle(.plain)
             } else {
                 Button(action: onVerify) {
                     Image(systemName: "circle")
@@ -76,6 +94,9 @@ struct HabitRowView: View {
         }
         .padding(14)
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
+        .sheet(isPresented: $showingScreenshotPicker) {
+            ScreenshotPickerView(habit: habit)
+        }
     }
 
     private var statusLabel: String {
