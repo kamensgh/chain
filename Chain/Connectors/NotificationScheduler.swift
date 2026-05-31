@@ -45,4 +45,17 @@ enum NotificationScheduler {
             await schedule(for: habit)
         }
     }
+
+    static func scheduleMilestone(for habit: Habit, streak: Int) async {
+        let content = UNMutableNotificationContent()
+        content.title = "🔥 \(streak)-Day Streak!"
+        content.body = "\(habit.emoji) \(habit.name) — you're on fire!"
+        content.sound = .default
+        let request = UNNotificationRequest(
+            identifier: "milestone-\(habit.id.uuidString)-\(streak)",
+            content: content,
+            trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        )
+        try? await UNUserNotificationCenter.current().add(request)
+    }
 }
