@@ -1,4 +1,3 @@
-// Chain/ChainApp.swift
 import SwiftUI
 import SwiftData
 
@@ -15,11 +14,21 @@ struct ChainApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup(id: "main") {
             ContentView()
                 .modelContainer(container)
                 .task { await ensureCompanionExists() }
         }
+
+        #if os(macOS)
+        MenuBarExtra {
+            MenuBarPopoverView()
+        } label: {
+            MenuBarIconView()
+        }
+        .menuBarExtraStyle(.window)
+        .modelContainer(container)
+        #endif
     }
 
     @MainActor
