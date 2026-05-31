@@ -3,17 +3,17 @@ import Foundation
 
 @Model
 final class Habit {
-    @Attribute(.unique) var id: UUID
-    var name: String
-    var emoji: String
-    var colorHex: String
-    var frequencyRaw: String
-    var goalConfigData: Data
-    var connectorTypeRaw: String
+    var id: UUID = UUID()
+    var name: String = ""
+    var emoji: String = ""
+    var colorHex: String = ""
+    var frequencyRaw: String = Frequency.daily.rawValue
+    var goalConfigData: Data = Data()
+    var connectorTypeRaw: String = ConnectorType.manual.rawValue
     var connectorEndpoint: String?
     var reminderTime: Date?
-    var gracePeriodEnabled: Bool
-    var createdAt: Date
+    var gracePeriodEnabled: Bool = false
+    var createdAt: Date = Date.now
 
     @Relationship(deleteRule: .cascade, inverse: \HabitEntry.habit)
     var entries: [HabitEntry] = []

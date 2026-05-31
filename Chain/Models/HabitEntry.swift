@@ -3,10 +3,10 @@ import Foundation
 
 @Model
 final class HabitEntry {
-    @Attribute(.unique) var id: UUID
-    var periodStart: Date
-    var statusRaw: String
-    var verifMethodRaw: String
+    var id: UUID = UUID()
+    var periodStart: Date = Date.now
+    var statusRaw: String = EntryStatus.pending.rawValue
+    var verifMethodRaw: String = VerifMethod.manual.rawValue
     var value: Double?
     var screenshotPath: String?
     var sourceLabel: String?

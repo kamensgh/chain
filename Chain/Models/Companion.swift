@@ -1,14 +1,13 @@
-// Chain/Models/Companion.swift
 import SwiftData
 import Foundation
 
 @Model
 final class Companion {
-    @Attribute(.unique) var id: UUID
-    var typeRaw: String
-    var xp: Double
-    var accessoriesUnlocked: [String]   // PetStage raw values the companion has reached (never shrinks)
-    var createdAt: Date
+    var id: UUID = UUID()
+    var typeRaw: String = CompanionType.pet.rawValue
+    var xp: Double = 0
+    var accessoriesUnlocked: [String] = []
+    var createdAt: Date = Date.now
     var lastXPDate: Date?
 
     var companionType: CompanionType {
@@ -24,8 +23,6 @@ final class Companion {
         self.createdAt = Date()
     }
 
-    /// Adds XP, clamps to stage floor, unlocks accessories for newly reached stages.
-    /// Returns the newly unlocked PetStage if a stage transition occurred, nil otherwise.
     @discardableResult
     func applyXP(_ delta: Double) -> PetStage? {
         let oldStage = CompanionEngine.stage(xp: xp)
