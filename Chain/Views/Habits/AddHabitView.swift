@@ -125,12 +125,14 @@ struct AddHabitView: View {
             h.connectorType = connectorType
             h.gracePeriodEnabled = gracePeriodEnabled
             h.reminderTime = reminderEnabled ? reminderTime : nil
+            Task { await NotificationScheduler.schedule(for: h) }
         } else {
             let h = Habit(name: trimmedName, emoji: emoji, frequency: frequency, goalConfig: goal)
             h.connectorType = connectorType
             h.gracePeriodEnabled = gracePeriodEnabled
             h.reminderTime = reminderEnabled ? reminderTime : nil
             context.insert(h)
+            Task { await NotificationScheduler.schedule(for: h) }
         }
         try? context.save()
         dismiss()
