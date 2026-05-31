@@ -65,7 +65,10 @@ struct TodayView: View {
             .padding()
         }
         .navigationTitle("Today")
-        .task { await verifyAll() }
+        .task {
+            await NotificationScheduler.rescheduleAll(habits)
+            await verifyAll()
+        }
         .refreshable { await verifyAll() }
     }
 
