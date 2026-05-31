@@ -8,7 +8,7 @@ final class Habit {
     var emoji: String = ""
     var colorHex: String = ""
     var frequencyRaw: String = Frequency.daily.rawValue
-    var goalConfigData: Data = Data()
+    var goalConfigData: Data = (try? JSONEncoder().encode(GoalConfig.boolean)) ?? Data()
     var connectorTypeRaw: String = ConnectorType.manual.rawValue
     var connectorEndpoint: String?
     var reminderTime: Date?
