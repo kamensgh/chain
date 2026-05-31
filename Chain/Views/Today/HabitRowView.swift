@@ -6,6 +6,7 @@ struct HabitRowView: View {
     let onVerify: () -> Void
 
     @State private var showingScreenshotPicker = false
+    @State private var milestoneCelebration: MilestoneCelebration?
 
     private var currentPeriodStart: Date {
         HabitScheduler.periodStart(for: habit.frequency, on: Date())
@@ -84,7 +85,10 @@ struct HabitRowView: View {
                 }
                 .buttonStyle(.plain)
             } else {
-                Button(action: onVerify) {
+                Button {
+                    onVerify()
+                    checkMilestone()
+                } label: {
                     Image(systemName: "circle")
                         .font(.title2)
                         .foregroundStyle(Color.accentColor)
@@ -96,6 +100,11 @@ struct HabitRowView: View {
         .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14))
         .sheet(isPresented: $showingScreenshotPicker) {
             ScreenshotPickerView(habit: habit)
+        }
+        .fullScreenCover(item: $milestoneCelebration) { celebration in
+            MilestoneOverlayView(habit: celebration.habit, streak: celebration.streak) {
+                milestoneCelebration = nil
+            }
         }
     }
 
@@ -112,5 +121,11 @@ struct HabitRowView: View {
         case .pending:  return "Pending"
         case .skipped:  return "Skipped"
         }
+    }
+
+    private func checkMilestone() {
+        guard let milestone = MilestoneChecker.milestone(for: currentStreak) else { return }
+        milestoneCelebration = MilestoneCelebration(habit: habit, streak: milestone)
+        Task { await NotificationScheduler.scheduleMilestone(for: habit, streak: milestone) }
     }
 }
