@@ -7,7 +7,7 @@ struct ChainApp: App {
 
     init() {
         do {
-            container = try ModelContainer(for: Habit.self, HabitEntry.self, Companion.self)
+            container = try ModelContainerFactory.make()
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
