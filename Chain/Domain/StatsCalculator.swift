@@ -6,7 +6,7 @@ enum StatsCalculator {
     static func periodsInWindow(
         frequency: Frequency,
         days: Int = 30,
-        today: Date = .now
+        today: Date
     ) -> [Date] {
         let cal = Calendar.current
         var seen = Set<Date>()
@@ -27,13 +27,12 @@ enum StatsCalculator {
         entries: [StreakEntry],
         frequency: Frequency,
         days: Int = 30,
-        today: Date = .now
+        today: Date
     ) -> Double {
         let periods = periodsInWindow(frequency: frequency, days: days, today: today)
         guard !periods.isEmpty else { return 0.0 }
-        let verified = periods.filter { period in
-            entries.contains { $0.periodStart == period && $0.status == .verified }
-        }.count
-        return Double(verified) / Double(periods.count)
+        let verifiedPeriods = Set(entries.lazy.filter { $0.status == .verified }.map { $0.periodStart })
+        let hits = periods.filter { verifiedPeriods.contains($0) }.count
+        return Double(hits) / Double(periods.count)
     }
 }
