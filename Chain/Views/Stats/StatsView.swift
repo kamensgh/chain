@@ -1,9 +1,31 @@
 import SwiftUI
 
+enum StatsTab: String, CaseIterable, Identifiable {
+    case streaks  = "Streaks"
+    case summary  = "Summary"
+    case calendar = "Calendar"
+    var id: String { rawValue }
+}
+
 struct StatsView: View {
+    @State private var selectedTab: StatsTab = .streaks
+
     var body: some View {
-        ContentUnavailableView("Stats coming soon", systemImage: "chart.bar.fill",
-            description: Text("Streak history and completion rates — coming in a future update."))
-            .navigationTitle("Stats")
+        VStack(spacing: 0) {
+            Picker("", selection: $selectedTab) {
+                ForEach(StatsTab.allCases) { tab in
+                    Text(tab.rawValue).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding([.horizontal, .top])
+
+            switch selectedTab {
+            case .streaks:  StreaksTabView()
+            case .summary:  SummaryTabView()
+            case .calendar: CalendarTabView()
+            }
+        }
+        .navigationTitle("Stats")
     }
 }
