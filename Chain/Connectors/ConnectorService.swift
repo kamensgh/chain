@@ -60,5 +60,18 @@ final class ConnectorService {
             context.insert(entry)
         }
         try? context.save()
+
+        guard result.status == .verified else { return }
+        let streakEntries = habit.entries.map {
+            StreakEntry(periodStart: $0.periodStart, status: $0.status)
+        }
+        let streak = StreakCalculator.current(
+            entries: streakEntries,
+            frequency: habit.frequency,
+            today: Date(),
+            gracePeriod: habit.gracePeriodEnabled
+        )
+        guard let milestone = MilestoneChecker.milestone(for: streak) else { return }
+        Task { await NotificationScheduler.scheduleMilestone(for: habit, streak: milestone) }
     }
 }
