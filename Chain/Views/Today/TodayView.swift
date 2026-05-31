@@ -57,7 +57,7 @@ struct TodayView: View {
                 } else {
                     ForEach(habits) { habit in
                         HabitRowView(habit: habit) {
-                            verify(habit: habit)
+                            HabitVerifier.verify(habit, allHabits: habits, context: context, companions: companions)
                         }
                     }
                 }
@@ -67,6 +67,15 @@ struct TodayView: View {
         .navigationTitle("Today")
         .task { await verifyAll() }
         .refreshable { await verifyAll() }
+    }
+
+    private var greetingText: String {
+        let hour = Calendar.current.component(.hour, from: Date())
+        switch hour {
+        case 0..<12: return "Good morning! ☀️"
+        case 12..<17: return "Good afternoon! 🌤️"
+        default:      return "Good evening! 🌙"
+        }
     }
 
     private func verifyAll() async {
@@ -83,49 +92,6 @@ struct TodayView: View {
                     await ConnectorService.shared.verify(habit: habit, context: context)
                 }
             }
-        }
-    }
-
-    private var greetingText: String {
-        let hour = Calendar.current.component(.hour, from: Date())
-        switch hour {
-        case 0..<12: return "Good morning! ☀️"
-        case 12..<17: return "Good afternoon! 🌤️"
-        default:      return "Good evening! 🌙"
-        }
-    }
-
-    private func verify(habit: Habit) {
-        let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
-        if let existing = habit.entries.first(where: { $0.periodStart == period }) {
-            guard existing.status != .verified else { return }
-            existing.status = .verified
-            existing.verifMethod = .manual
-            existing.verifiedAt = Date()
-        } else {
-            let entry = HabitEntry(habit: habit, periodStart: period)
-            entry.status = .verified
-            entry.verifMethod = .manual
-            entry.verifiedAt = Date()
-            context.insert(entry)
-        }
-        applyDailyXP()
-        try? context.save()
-    }
-
-    private func applyDailyXP() {
-        guard let companion = companions.first else { return }
-        // Only award XP once per calendar day
-        if let last = companion.lastXPDate, Calendar.current.isDateInToday(last) { return }
-        let needStates: [NeedState] = CompanionNeed.allCases.prefix(min(habits.count, 3)).map { need in
-            let habit = habits[need.rawValue]
-            let entries = habit.entries.map { StreakEntry(periodStart: $0.periodStart, status: $0.status) }
-            return CompanionEngine.needState(for: need, entries: entries, frequency: habit.frequency, now: Date())
-        }
-        let delta = CompanionEngine.xpDelta(needStates: needStates)
-        if delta > 0 {
-            companion.applyXP(delta)
-            companion.lastXPDate = Date()
         }
     }
 }

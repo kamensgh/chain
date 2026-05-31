@@ -21,7 +21,8 @@ let package = Package(
                 "Models/HabitEntry.swift",
                 "Models/Companion.swift",
                 "Connectors/HealthKitConnector.swift",
-                "Connectors/ConnectorService.swift"
+                "Connectors/ConnectorService.swift",
+                "Connectors/HabitVerifier.swift"
             ],
             sources: ["Domain", "Connectors", "Models"]
         ),
