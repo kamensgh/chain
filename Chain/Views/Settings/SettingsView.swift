@@ -1,7 +1,9 @@
 import SwiftUI
+import SwiftData
 import UserNotifications
 
 struct SettingsView: View {
+    @Query(sort: \Habit.createdAt) private var habits: [Habit]
     @State private var authStatus: UNAuthorizationStatus = .notDetermined
 
     var body: some View {
@@ -44,12 +46,28 @@ struct SettingsView: View {
                 }
             }
         case .authorized, .provisional, .ephemeral:
-            VStack(alignment: .leading, spacing: 4) {
-                Label("Notifications enabled", systemImage: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                Text("Reminders are set per-habit in the Habits tab.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+            Group {
+                NotificationRowView(
+                    label: "End-of-day nudge",
+                    enabledKey: "nudgeEnabled", enabledDefault: true,
+                    hourKey: "nudgeHour", hourDefault: 21,
+                    minuteKey: "nudgeMinute", minuteDefault: 0,
+                    habits: habits
+                )
+                NotificationRowView(
+                    label: "Streak at risk",
+                    enabledKey: "atRiskEnabled", enabledDefault: true,
+                    hourKey: "atRiskHour", hourDefault: 22,
+                    minuteKey: "atRiskMinute", minuteDefault: 0,
+                    habits: habits
+                )
+                NotificationRowView(
+                    label: "Weekly summary",
+                    enabledKey: "weeklyEnabled", enabledDefault: true,
+                    hourKey: "weeklyHour", hourDefault: 20,
+                    minuteKey: "weeklyMinute", minuteDefault: 0,
+                    habits: habits
+                )
             }
         case .denied:
             VStack(alignment: .leading, spacing: 8) {
@@ -65,6 +83,59 @@ struct SettingsView: View {
             }
         @unknown default:
             EmptyView()
+        }
+    }
+}
+
+private struct NotificationRowView: View {
+    let label: String
+    let enabledDefault: Bool
+    let hourDefault: Int
+    let minuteDefault: Int
+    let habits: [Habit]
+
+    @AppStorage private var enabled: Bool
+    @AppStorage private var hour: Int
+    @AppStorage private var minute: Int
+
+    init(label: String,
+         enabledKey: String, enabledDefault: Bool,
+         hourKey: String, hourDefault: Int,
+         minuteKey: String, minuteDefault: Int,
+         habits: [Habit]) {
+        self.label = label
+        self.enabledDefault = enabledDefault
+        self.hourDefault = hourDefault
+        self.minuteDefault = minuteDefault
+        self.habits = habits
+        _enabled = AppStorage(wrappedValue: enabledDefault, enabledKey)
+        _hour    = AppStorage(wrappedValue: hourDefault,    hourKey)
+        _minute  = AppStorage(wrappedValue: minuteDefault,  minuteKey)
+    }
+
+    private var timeBinding: Binding<Date> {
+        Binding(
+            get: {
+                Calendar.current.date(from: DateComponents(hour: hour, minute: minute)) ?? Date()
+            },
+            set: { newDate in
+                let comps = Calendar.current.dateComponents([.hour, .minute], from: newDate)
+                hour   = comps.hour   ?? hourDefault
+                minute = comps.minute ?? minuteDefault
+            }
+        )
+    }
+
+    var body: some View {
+        Toggle(label, isOn: $enabled)
+            .onChange(of: enabled) { _, _ in
+                Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
+            }
+        if enabled {
+            DatePicker("Time", selection: timeBinding, displayedComponents: .hourAndMinute)
+                .onChange(of: timeBinding.wrappedValue) { _, _ in
+                    Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
+                }
         }
     }
 }
