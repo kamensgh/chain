@@ -23,7 +23,8 @@ let package = Package(
                 "Connectors/HealthKitConnector.swift",
                 "Connectors/ConnectorService.swift",
                 "Connectors/HabitVerifier.swift",
-                "Connectors/NotificationScheduler.swift"
+                "Connectors/NotificationScheduler.swift",
+                "Connectors/SmartNotificationScheduler.swift"
             ],
             sources: ["Domain", "Connectors", "Models"]
         ),
