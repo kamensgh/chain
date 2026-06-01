@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
+
     var body: some View {
         #if os(macOS)
         NavigationSplitView {
@@ -23,6 +25,12 @@ struct ContentView: View {
         } detail: {
             TodayView()
         }
+        .fullScreenCover(isPresented: .init(
+            get: { !hasCompletedOnboarding },
+            set: { if !$0 { hasCompletedOnboarding = true } }
+        )) {
+            OnboardingView { hasCompletedOnboarding = true }
+        }
         #else
         TabView {
             NavigationStack { TodayView() }
@@ -33,6 +41,12 @@ struct ContentView: View {
                 .tabItem { Label("Stats", systemImage: "chart.bar.fill") }
             NavigationStack { SettingsView() }
                 .tabItem { Label("Settings", systemImage: "gearshape.fill") }
+        }
+        .fullScreenCover(isPresented: .init(
+            get: { !hasCompletedOnboarding },
+            set: { if !$0 { hasCompletedOnboarding = true } }
+        )) {
+            OnboardingView { hasCompletedOnboarding = true }
         }
         #endif
     }
