@@ -6,6 +6,17 @@ struct ChainApp: App {
     let container: ModelContainer
 
     init() {
+        UserDefaults.standard.register(defaults: [
+            "nudgeEnabled": true,
+            "nudgeHour": 21,
+            "nudgeMinute": 0,
+            "atRiskEnabled": true,
+            "atRiskHour": 22,
+            "atRiskMinute": 0,
+            "weeklyEnabled": true,
+            "weeklyHour": 20,
+            "weeklyMinute": 0
+        ])
         do {
             container = try ModelContainerFactory.make()
         } catch {
