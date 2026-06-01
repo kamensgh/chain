@@ -27,7 +27,7 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: .init(
             get: { !hasCompletedOnboarding },
-            set: { if !$0 { hasCompletedOnboarding = true } }
+            set: { _ in }
         )) {
             OnboardingView { hasCompletedOnboarding = true }
         }
@@ -44,7 +44,7 @@ struct ContentView: View {
         }
         .fullScreenCover(isPresented: .init(
             get: { !hasCompletedOnboarding },
-            set: { if !$0 { hasCompletedOnboarding = true } }
+            set: { _ in }
         )) {
             OnboardingView { hasCompletedOnboarding = true }
         }
