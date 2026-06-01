@@ -58,6 +58,7 @@ struct TodayView: View {
                     ForEach(habits) { habit in
                         HabitRowView(habit: habit) {
                             HabitVerifier.verify(habit, allHabits: habits, context: context, companions: companions)
+                            Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
                         }
                     }
                 }
@@ -68,8 +69,12 @@ struct TodayView: View {
         .task {
             await NotificationScheduler.rescheduleAll(habits)
             await verifyAll()
+            await SmartNotificationScheduler.rescheduleForToday(habits: habits)
         }
-        .refreshable { await verifyAll() }
+        .refreshable {
+            await verifyAll()
+            await SmartNotificationScheduler.rescheduleForToday(habits: habits)
+        }
     }
 
     private var greetingText: String {
