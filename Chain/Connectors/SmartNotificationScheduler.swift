@@ -10,7 +10,9 @@ enum SmartNotificationScheduler {
     static func rescheduleForToday(habits: [Habit]) async {
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
-        guard settings.authorizationStatus == .authorized else { return }
+        guard settings.authorizationStatus == .authorized ||
+              settings.authorizationStatus == .provisional ||
+              settings.authorizationStatus == .ephemeral else { return }
         guard !habits.isEmpty else { return }
 
         let allVerified = habits.allSatisfy { habit in
@@ -19,6 +21,7 @@ enum SmartNotificationScheduler {
         }
 
         if allVerified {
+            // Weekly summary is intentionally not cancelled here — it's a recap, not a nudge
             center.removePendingNotificationRequests(withIdentifiers: [nudgeID, atRiskID])
         } else {
             if UserDefaults.standard.bool(forKey: "nudgeEnabled") {
