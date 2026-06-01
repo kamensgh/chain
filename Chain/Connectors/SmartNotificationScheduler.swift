@@ -11,6 +11,7 @@ enum SmartNotificationScheduler {
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
         guard settings.authorizationStatus == .authorized else { return }
+        guard !habits.isEmpty else { return }
 
         let allVerified = habits.allSatisfy { habit in
             let periodStart = HabitScheduler.periodStart(for: habit.frequency, on: Date())
