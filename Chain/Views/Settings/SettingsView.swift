@@ -133,7 +133,10 @@ private struct NotificationRowView: View {
             }
         if enabled {
             DatePicker("Time", selection: timeBinding, displayedComponents: .hourAndMinute)
-                .onChange(of: timeBinding.wrappedValue) { _, _ in
+                .onChange(of: hour) { _, _ in
+                    Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
+                }
+                .onChange(of: minute) { _, _ in
                     Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
                 }
         }
