@@ -39,6 +39,7 @@ struct SuggestHabitsView: View {
                             Spacer()
                             Button("Add") {
                                 onSelect(suggestion)
+                                dismiss()
                             }
                             .buttonStyle(.borderedProminent)
                             .controlSize(.small)

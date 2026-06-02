@@ -6,11 +6,9 @@ struct AddHabitView: View {
     @Environment(\.dismiss) private var dismiss
 
     var habit: Habit? = nil         // nil = create new, non-nil = edit existing
-    var prefillName: String = ""
-    var prefillEmoji: String = ""
 
-    @State private var name = ""
-    @State private var emoji = "⭐"
+    @State private var name: String
+    @State private var emoji: String
     @State private var frequency: Frequency = .daily
     @State private var goalUnit: GoalUnit = .boolean
     @State private var goalTarget: Double = 0
@@ -19,6 +17,11 @@ struct AddHabitView: View {
     @State private var reminderTime = Calendar.current.date(
         bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
     @State private var gracePeriodEnabled = false
+
+    init(prefillName: String = "", prefillEmoji: String = "⭐") {
+        _name = State(initialValue: prefillName)
+        _emoji = State(initialValue: prefillEmoji)
+    }
 
     var body: some View {
         Form {
@@ -114,9 +117,6 @@ struct AddHabitView: View {
                 reminderEnabled = true
                 reminderTime = t
             }
-        } else {
-            if !prefillName.isEmpty { name = prefillName }
-            if !prefillEmoji.isEmpty { emoji = prefillEmoji }
         }
     }
 
