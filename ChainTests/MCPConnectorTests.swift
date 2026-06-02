@@ -4,7 +4,7 @@ import Foundation
 @testable import ChainDomain
 
 final class StubURLProtocol: URLProtocol {
-    static var handler: ((URLRequest) -> (Data, HTTPURLResponse))?
+    nonisolated(unsafe) static var handler: ((URLRequest) -> (Data, HTTPURLResponse))?
 
     override class func canInit(with request: URLRequest) -> Bool { true }
     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }

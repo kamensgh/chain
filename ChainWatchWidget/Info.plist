@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>CFBundleDisplayName</key>
-	<string>Chain</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,21 +13,15 @@
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Chain lets you take a photo as proof that you completed your habit.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Chain reads health data to automatically verify your fitness habits.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Chain saves a screenshot as proof that you completed your habit.</string>
-	<key>UILaunchScreen</key>
+	<key>NSExtension</key>
 	<dict>
-		<key>UIColorName</key>
-		<string></string>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widgetkit-extension</string>
 	</dict>
 </dict>
 </plist>

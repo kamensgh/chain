@@ -20,16 +20,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Chain lets you take a photo as proof that you completed your habit.</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>Chain reads health data to automatically verify your fitness habits.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Chain saves a screenshot as proof that you completed your habit.</string>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string></string>
-	</dict>
+	<key>WKApplication</key>
+	<true/>
+	<key>WKCompanionAppBundleIdentifier</key>
+	<string>com.chain.Chain</string>
 </dict>
 </plist>

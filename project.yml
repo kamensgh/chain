@@ -2,8 +2,9 @@ name: Chain
 options:
   bundleIdPrefix: com.chain
   deploymentTarget:
-    iOS: "17.0"
+    iOS: "18.0"
     macOS: "14.0"
+    watchOS: "11.0"
   xcodeVersion: "16.0"
   groupSortPosition: none
 
@@ -16,6 +17,11 @@ targets:
     dependencies:
       - target: ChainWidget
         embed: true
+        platforms: [iOS]
+      - target: ChainWatch
+        embed: true
+        platforms: [watchOS]
+      - sdk: WatchConnectivity.framework
         platforms: [iOS]
     info:
       path: Chain/Info.plist
@@ -55,6 +61,45 @@ targets:
       properties:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
+
+  ChainWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: ChainWatch
+      - path: Chain/Models
+      - path: Chain/Domain
+    dependencies:
+      - target: ChainWatchWidget
+        embed: true
+      - sdk: WatchConnectivity.framework
+    info:
+      path: ChainWatch/Info.plist
+      properties:
+        CFBundleDisplayName: Chain
+        WKApplication: YES
+        WKCompanionAppBundleIdentifier: com.chain.Chain
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_BUNDLE_IDENTIFIER: com.chain.Chain.watch
+
+  ChainWatchWidget:
+    type: app-extension
+    platform: watchOS
+    sources:
+      - path: ChainWatchWidget
+      - path: Chain/Models
+      - path: Chain/Domain
+    info:
+      path: ChainWatchWidget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        PRODUCT_BUNDLE_IDENTIFIER: com.chain.Chain.watch.widget
 
   ChainTests_iOS_Runner:
     type: bundle.unit-test
