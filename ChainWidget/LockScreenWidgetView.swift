@@ -19,8 +19,6 @@ struct LockScreenWidgetView: View {
             }
         case .accessoryInline:
             Text("⛓️ \(entry.verifiedCount) / \(entry.totalCount) done")
-        case .accessoryRectangular:
-            Text("⛓️")
         @unknown default:
             Text("⛓️")
         }

@@ -31,7 +31,7 @@ struct VerifyHabitIntent: AppIntent {
         entry.verifMethod = .manual
         entry.verifiedAt = Date()
         ctx.insert(entry)
-        try? ctx.save()
+        try ctx.save()
         WidgetCenter.shared.reloadAllTimelines()
         return .result()
     }
