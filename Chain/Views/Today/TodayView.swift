@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct TodayView: View {
     @Query(sort: \Habit.createdAt) private var habits: [Habit]
@@ -59,6 +60,7 @@ struct TodayView: View {
                         HabitRowView(habit: habit) {
                             HabitVerifier.verify(habit, allHabits: habits, context: context, companions: companions)
                             Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
+                            WidgetCenter.shared.reloadAllTimelines()
                         }
                     }
                 }
@@ -70,10 +72,12 @@ struct TodayView: View {
             await NotificationScheduler.rescheduleAll(habits)
             await verifyAll()
             await SmartNotificationScheduler.rescheduleForToday(habits: habits)
+            WidgetCenter.shared.reloadAllTimelines()
         }
         .refreshable {
             await verifyAll()
             await SmartNotificationScheduler.rescheduleForToday(habits: habits)
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 
