@@ -13,6 +13,7 @@ struct TodayWatchView: View {
                         .font(.caption)
                         .multilineTextAlignment(.center)
                 }
+                .navigationTitle("Today")
             } else {
                 List {
                     ForEach(store.habits) { habit in
