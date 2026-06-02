@@ -16,8 +16,8 @@ final class WatchHabitStore {
     func update(from payload: WatchPayload) {
         habits = payload.habits
         syncedAt = payload.syncedAt
-        UserDefaults.standard.set(payload.verifiedCount, forKey: "watch_verifiedCount")
-        UserDefaults.standard.set(payload.totalCount, forKey: "watch_totalCount")
+        UserDefaults.standard.set(verifiedCount, forKey: "watch_verifiedCount")
+        UserDefaults.standard.set(totalCount, forKey: "watch_totalCount")
         WidgetCenter.shared.reloadAllTimelines()
     }
 
