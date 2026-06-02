@@ -13,6 +13,9 @@ targets:
     platform: [iOS, macOS]
     sources:
       - path: Chain
+    dependencies:
+      - target: ChainWidget
+        embed: true
     info:
       path: Chain/Info.plist
       properties:
@@ -32,6 +35,25 @@ targets:
         INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         CODE_SIGN_ENTITLEMENTS: Chain/Chain.entitlements
+
+  ChainWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ChainWidget
+      - path: Chain/Models
+      - path: Chain/Domain
+      - path: Chain/Persistence
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
+        CODE_SIGN_ENTITLEMENTS: ChainWidget/ChainWidget.entitlements
+        PRODUCT_BUNDLE_IDENTIFIER: com.chain.app.widget
+    info:
+      path: ChainWidget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
 
   ChainTests_iOS_Runner:
     type: bundle.unit-test

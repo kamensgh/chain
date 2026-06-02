@@ -18,7 +18,7 @@ struct ChainApp: App {
             "weeklyMinute": 0
         ])
         do {
-            container = try ModelContainerFactory.make()
+            container = try ModelContainerFactory.make(inAppGroup: true)
         } catch {
             fatalError("Failed to create ModelContainer: \(error)")
         }
