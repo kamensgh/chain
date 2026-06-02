@@ -61,6 +61,9 @@ struct TodayView: View {
                             HabitVerifier.verify(habit, allHabits: habits, context: context, companions: companions)
                             Task { await SmartNotificationScheduler.rescheduleForToday(habits: habits) }
                             WidgetCenter.shared.reloadAllTimelines()
+                            #if os(iOS)
+                            PhoneWatchSession.shared.sendSnapshot(habits: habits)
+                            #endif
                         }
                     }
                 }
@@ -73,11 +76,17 @@ struct TodayView: View {
             await verifyAll()
             await SmartNotificationScheduler.rescheduleForToday(habits: habits)
             WidgetCenter.shared.reloadAllTimelines()
+            #if os(iOS)
+            PhoneWatchSession.shared.sendSnapshot(habits: habits)
+            #endif
         }
         .refreshable {
             await verifyAll()
             await SmartNotificationScheduler.rescheduleForToday(habits: habits)
             WidgetCenter.shared.reloadAllTimelines()
+            #if os(iOS)
+            PhoneWatchSession.shared.sendSnapshot(habits: habits)
+            #endif
         }
     }
 
