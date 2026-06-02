@@ -16,6 +16,7 @@ targets:
     dependencies:
       - target: ChainWidget
         embed: true
+        platforms: [iOS]
     info:
       path: Chain/Info.plist
       properties:
@@ -48,7 +49,7 @@ targets:
       base:
         SWIFT_VERSION: "5.9"
         CODE_SIGN_ENTITLEMENTS: ChainWidget/ChainWidget.entitlements
-        PRODUCT_BUNDLE_IDENTIFIER: com.chain.app.widget
+        PRODUCT_BUNDLE_IDENTIFIER: com.chain.Chain.widget
     info:
       path: ChainWidget/Info.plist
       properties:

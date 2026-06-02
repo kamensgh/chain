@@ -11,6 +11,9 @@ enum ModelContainerFactory {
         )
         #else
         let config: ModelConfiguration
+        // Passing inAppGroup: true moves the store to the shared App Group container.
+        // Existing installs with data in the default sandbox will start empty until
+        // a migration step copies the old SQLite file to the new location.
         if inAppGroup {
             config = ModelConfiguration(
                 schema: schema,

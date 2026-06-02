@@ -76,7 +76,6 @@
 		8312134125A0E7E8038E7038 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A278E9AA973FC96DC33966 /* Frequency.swift */; };
 		8C8221A00FC9E42D4A53A15B /* CompanionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3849012BC2D9194F8EB3A /* CompanionCardView.swift */; };
 		8CFF475D3F86A1AAE0A7480D /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F17E22EDE72F967E432D38 /* MenuBarIconView.swift */; };
-		8E068E92229A26866592064B /* ChainWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 46AD2DDA1C69D9938657A6D1 /* ChainWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8E2A05C34CCEB1B17DBF999C /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7E4F7A88B67C7E35EC5C7 /* ModelContainerFactory.swift */; };
 		9258CB5F900A4C549A213FA4 /* EntryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD78469ED48F29028392F3 /* EntryStatus.swift */; };
 		9267FD8F09CFDF88B349E747 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6B277E81ED80394B93E1F /* StreakCalculator.swift */; };
@@ -149,13 +148,6 @@
 			remoteGlobalIDString = 2F03B27938223B3F5D161CEE;
 			remoteInfo = Chain_iOS;
 		};
-		77565A951B67E4972ADA0269 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F2529367372772A2D2DEC3E6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8AA9F1078558F95BB30AC948;
-			remoteInfo = ChainWidget;
-		};
 		C111F4755E09FF236AFCE555 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F2529367372772A2D2DEC3E6 /* Project object */;
@@ -173,17 +165,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				C26A59348E8820AA75565869 /* ChainWidget.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		30113FDA0FFCEA033B2FF908 /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				8E068E92229A26866592064B /* ChainWidget.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,12 +539,10 @@
 			buildPhases = (
 				8AFF03AC718B57783B277C49 /* Sources */,
 				0FFF30E716AB65C34E7DB1B8 /* Resources */,
-				30113FDA0FFCEA033B2FF908 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				551DCD91DE8B74F2A5605FC7 /* PBXTargetDependency */,
 			);
 			name = Chain_macOS;
 			packageProductDependencies = (
@@ -793,11 +772,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		551DCD91DE8B74F2A5605FC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8AA9F1078558F95BB30AC948 /* ChainWidget */;
-			targetProxy = 77565A951B67E4972ADA0269 /* PBXContainerItemProxy */;
-		};
 		7780EC8A3CFA3C569F0C5275 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8AA9F1078558F95BB30AC948 /* ChainWidget */;
@@ -911,7 +885,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chain.app.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chain.Chain.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -928,7 +902,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.chain.app.widget;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chain.Chain.widget;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.9;
 				TARGETED_DEVICE_FAMILY = "1,2";
