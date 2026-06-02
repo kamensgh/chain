@@ -17,6 +17,7 @@ struct HabitsListView: View {
     #if os(iOS)
     @State private var showingSuggest = false
     @State private var addPrefill: HabitPrefill? = nil
+    @State private var pendingPrefill: HabitPrefill? = nil
     #endif
 
     var body: some View {
@@ -61,11 +62,15 @@ struct HabitsListView: View {
             NavigationStack { AddHabitView() }
         }
         #if os(iOS)
-        .sheet(isPresented: $showingSuggest) {
+        .sheet(isPresented: $showingSuggest, onDismiss: {
+            if let p = pendingPrefill {
+                addPrefill = p
+                pendingPrefill = nil
+            }
+        }) {
             NavigationStack {
                 SuggestHabitsView(existingNames: habits.map(\.name)) { selected in
-                    addPrefill = HabitPrefill(name: selected.name, emoji: selected.emoji)
-                    showingSuggest = false
+                    pendingPrefill = HabitPrefill(name: selected.name, emoji: selected.emoji)
                 }
             }
         }

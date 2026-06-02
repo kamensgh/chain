@@ -18,6 +18,7 @@ struct AddHabitView: View {
         bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
     @State private var gracePeriodEnabled = false
 
+    // Only use when creating a new habit (habit == nil); loadExisting() overwrites these if habit is set.
     init(prefillName: String = "", prefillEmoji: String = "⭐") {
         _name = State(initialValue: prefillName)
         _emoji = State(initialValue: prefillEmoji)
