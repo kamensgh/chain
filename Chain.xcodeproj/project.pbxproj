@@ -20,6 +20,7 @@
 		1133F101214B9A3A639615B7 /* WatchHabitStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A0104BF10D6E592C10F72 /* WatchHabitStore.swift */; };
 		13C28A42C1D7621749F90A59 /* PermissionsStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625996AF3B95237E3961493B /* PermissionsStepView.swift */; };
 		143587BDD1EEAB5EAD9FD900 /* MilestoneCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFA43A29241B68538247A07 /* MilestoneCheckerTests.swift */; };
+		147B9A6A3D96B6A952962B5F /* HabitSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B03F29158D13CBF13A69FB /* HabitSuggestionService.swift */; };
 		162F639ABE048566AE02F160 /* HabitEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4345F3E550C04591B8C6B1B /* HabitEntry.swift */; };
 		1A2273FD6731B318A4E5FD4C /* CompanionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B089AD5A1375FF6D5E24BAF5 /* CompanionEngine.swift */; };
 		1B45F951CB034F7BB710AF92 /* ConnectorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99D2F4D1712B6D857F56AD8 /* ConnectorType.swift */; };
@@ -80,6 +81,7 @@
 		6A601D843860721C5AB9243E /* TodayWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57948DF53E1CCB02E297D3C9 /* TodayWatchView.swift */; };
 		6A96EEBA0DDE4B47984D144B /* WatchConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8B8D0A900D74D806DB235B /* WatchConnectivity.framework */; };
 		6BDFA56EBA576F1D68A8C69F /* FirstHabitStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAD741A67D01D6CCDED6C63 /* FirstHabitStepView.swift */; };
+		6C66F189F7C432BF471D537C /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
 		6D10D01AC2E4B1B7D66227FF /* HabitConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036A8817E1413F55AD514CC6 /* HabitConnector.swift */; };
 		6DC5194D3A6C357CCFF35377 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858C7BF1813A300F3D785B3F /* ContentView.swift */; };
 		6E8974FBF82AA714B9C28CA0 /* CompanionSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6F493FB76B1F252D07015B /* CompanionSettingsView.swift */; };
@@ -93,6 +95,7 @@
 		7851C9C5AC141AE57B4CC4CD /* ManualConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E2AF026A13B3693E06ECB9 /* ManualConnectorTests.swift */; };
 		79A44A6ABCE8D583376EC94F /* Companion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110ECCA8B6C6F9836150A8D0 /* Companion.swift */; };
 		7A985933897F092EEF9F4267 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E028611E3C1E028B06A665C /* OnboardingView.swift */; };
+		7DD2B8EAFFBC05E1647CBE1E /* HabitSuggestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88694A8F96EACDED607BC92 /* HabitSuggestionTests.swift */; };
 		7E5EBCCB40F06EFE961E6CFE /* Habit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110F5754CB4619F00A1A80A0 /* Habit.swift */; };
 		7EC3587796F6EAF14796AC3F /* CompanionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C429E91D7CAF7E002E6EFFEA /* CompanionEngineTests.swift */; };
 		81314A70333BAE667C12E7E0 /* MilestoneChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EA9DA4541D332C6F92B52 /* MilestoneChecker.swift */; };
@@ -102,6 +105,8 @@
 		8312134125A0E7E8038E7038 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A278E9AA973FC96DC33966 /* Frequency.swift */; };
 		851EBD0809AA70F05F2C66DD /* HabitRowWatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34727D0AF4E0D733F8F20EE0 /* HabitRowWatchView.swift */; };
 		8782F06B68B7DC4ADD18336D /* HabitScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C58575B30AEE70BDF869325 /* HabitScheduler.swift */; };
+		8785D7DC15827CA0E7B59475 /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
+		8B0AC5AEDAEC6607FEE5F5AC /* HabitSuggestionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B03F29158D13CBF13A69FB /* HabitSuggestionService.swift */; };
 		8C8221A00FC9E42D4A53A15B /* CompanionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3849012BC2D9194F8EB3A /* CompanionCardView.swift */; };
 		8CFF475D3F86A1AAE0A7480D /* MenuBarIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F17E22EDE72F967E432D38 /* MenuBarIconView.swift */; };
 		8E2A05C34CCEB1B17DBF999C /* ModelContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB7E4F7A88B67C7E35EC5C7 /* ModelContainerFactory.swift */; };
@@ -111,6 +116,7 @@
 		9267FD8F09CFDF88B349E747 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6B277E81ED80394B93E1F /* StreakCalculator.swift */; };
 		9646B28EA2B48948CFBDE2D2 /* MenuBarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF2B551EC9208CD7267D7 /* MenuBarPopoverView.swift */; };
 		9A76E1EBF386064AEB3D7D3B /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FCC49BE498A02306E92DF /* KeychainHelper.swift */; };
+		9DEA2739BB3CEDEEFDADFDFA /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
 		9F0CAA7EA4F7F97D64BF7312 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D97B39FFB6037E1F589512 /* SettingsView.swift */; };
 		9F5F72EB9223B170CB2C3364 /* HabitEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4345F3E550C04591B8C6B1B /* HabitEntry.swift */; };
 		9F944FAE12FF9D9BC55C5136 /* CompanionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B089AD5A1375FF6D5E24BAF5 /* CompanionEngine.swift */; };
@@ -126,6 +132,8 @@
 		AA54FD60849F935629986CBF /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6B277E81ED80394B93E1F /* StreakCalculator.swift */; };
 		AB34549A84B4B776287E9047 /* ManualConnectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E2AF026A13B3693E06ECB9 /* ManualConnectorTests.swift */; };
 		AB4CD3CCCBD36380454201E7 /* HabitVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32A32D8C50AA7A952B3AECA /* HabitVerifier.swift */; };
+		ABA80856E111684AA2F66D22 /* HabitSuggestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88694A8F96EACDED607BC92 /* HabitSuggestionTests.swift */; };
+		ABD07E79CD1B4921A8887208 /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
 		AC8476CC1F11D511CC92E468 /* ChainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1A5E64A16187982432F0F /* ChainApp.swift */; };
 		AD56F3C18ACCB8FA0143B256 /* MilestoneChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115EA9DA4541D332C6F92B52 /* MilestoneChecker.swift */; };
 		AF78ADD5A57F0E6A33CA3D35 /* MilestoneOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D9D58978EA5906EC2A5EE5 /* MilestoneOverlayView.swift */; };
@@ -181,6 +189,7 @@
 		FAFC58AC57453805D3E71200 /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B690AF619E69CD146AF4CF0C /* NotificationScheduler.swift */; };
 		FB059BB9B89A9F056C61B891 /* WatchSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D914E91DB5A8E2552C6B719 /* WatchSession.swift */; };
 		FBA645D56CF212AA343319D8 /* SmartNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE2FBC7EEF03605B69DF4B2 /* SmartNotificationScheduler.swift */; };
+		FC41B65EE6E897DC1AF5FEAD /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
 		FD6DA184BF07889762AA7D5F /* HabitEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4345F3E550C04591B8C6B1B /* HabitEntry.swift */; };
 /* End PBXBuildFile section */
 
@@ -302,10 +311,12 @@
 		9D1CD21906894A94F47ADD91 /* ChainWatchWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWatchWidgetBundle.swift; sourceTree = "<group>"; };
 		9EBED8C7ED3F28BB48B2E19A /* WatchPayloadTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchPayloadTests.swift; sourceTree = "<group>"; };
 		A0CD9CB57225D22C43D049D2 /* SummaryTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryTabView.swift; sourceTree = "<group>"; };
+		A88694A8F96EACDED607BC92 /* HabitSuggestionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSuggestionTests.swift; sourceTree = "<group>"; };
 		A99D2F4D1712B6D857F56AD8 /* ConnectorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorType.swift; sourceTree = "<group>"; };
 		ADF457D86871CD459F03ADCA /* KeychainHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelperTests.swift; sourceTree = "<group>"; };
 		AE0B941C8F0E6DFDE4E24FF8 /* .gitkeep */ = {isa = PBXFileReference; path = .gitkeep; sourceTree = "<group>"; };
 		B089AD5A1375FF6D5E24BAF5 /* CompanionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanionEngine.swift; sourceTree = "<group>"; };
+		B0B03F29158D13CBF13A69FB /* HabitSuggestionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSuggestionService.swift; sourceTree = "<group>"; };
 		B690AF619E69CD146AF4CF0C /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
 		BDAD741A67D01D6CCDED6C63 /* FirstHabitStepView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstHabitStepView.swift; sourceTree = "<group>"; };
 		BFBEC883246D233E225DEE33 /* Chain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chain.entitlements; sourceTree = "<group>"; };
@@ -318,6 +329,7 @@
 		CE8B8D0A900D74D806DB235B /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		CEB7E4F7A88B67C7E35EC5C7 /* ModelContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelContainerFactory.swift; sourceTree = "<group>"; };
 		CFAB80B95BF7DE3461C2B3AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitSuggestionHelpers.swift; sourceTree = "<group>"; };
 		D4345F3E550C04591B8C6B1B /* HabitEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitEntry.swift; sourceTree = "<group>"; };
 		D5CD78469ED48F29028392F3 /* EntryStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryStatus.swift; sourceTree = "<group>"; };
 		D6A278E9AA973FC96DC33966 /* Frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequency.swift; sourceTree = "<group>"; };
@@ -384,6 +396,7 @@
 				DA1513C88D02180C028287D6 /* ChainTests.swift */,
 				C429E91D7CAF7E002E6EFFEA /* CompanionEngineTests.swift */,
 				70DFAB81ED438401E84B2E1D /* HabitSchedulerTests.swift */,
+				A88694A8F96EACDED607BC92 /* HabitSuggestionTests.swift */,
 				ADF457D86871CD459F03ADCA /* KeychainHelperTests.swift */,
 				50E2AF026A13B3693E06ECB9 /* ManualConnectorTests.swift */,
 				5ABFFCCECD369097CB50CBD8 /* MCPConnectorTests.swift */,
@@ -476,6 +489,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8D14FCC4DA201857787BE4C8 /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				B0B03F29158D13CBF13A69FB /* HabitSuggestionService.swift */,
+			);
+			path = AI;
+			sourceTree = "<group>";
+		};
 		8FE0AA837164285C91E926D4 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +532,7 @@
 		BF67769B41B0064B44FE27EB /* Chain */ = {
 			isa = PBXGroup;
 			children = (
+				8D14FCC4DA201857787BE4C8 /* AI */,
 				11A1CAA2B8678E83C6EE720B /* Assets.xcassets */,
 				BFBEC883246D233E225DEE33 /* Chain.entitlements */,
 				C4A1A5E64A16187982432F0F /* ChainApp.swift */,
@@ -579,6 +601,7 @@
 				FDBC1CD454387DFD7425E88B /* GoalConfig.swift */,
 				110F5754CB4619F00A1A80A0 /* Habit.swift */,
 				D4345F3E550C04591B8C6B1B /* HabitEntry.swift */,
+				D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */,
 				080AA976001570D9B1334900 /* WatchPayload.swift */,
 			);
 			name = Models;
@@ -833,6 +856,7 @@
 				38A80E382E5702D43F364FFF /* Habit.swift in Sources */,
 				0A83FC4190C7B60F1172A9F9 /* HabitEntry.swift in Sources */,
 				DE3FFF3EF156CF36BFECE6C9 /* HabitScheduler.swift in Sources */,
+				ABD07E79CD1B4921A8887208 /* HabitSuggestionHelpers.swift in Sources */,
 				37C70DCA2EA71F0C720B0142 /* MilestoneChecker.swift in Sources */,
 				30B51072A93A2AD50C5B4A9B /* StatsCalculator.swift in Sources */,
 				D746436B9610142E1180E421 /* StreakCalculator.swift in Sources */,
@@ -866,6 +890,8 @@
 				162F639ABE048566AE02F160 /* HabitEntry.swift in Sources */,
 				5EC31D61308280E974AC25A2 /* HabitRowView.swift in Sources */,
 				61C717506B4C440269EC0640 /* HabitScheduler.swift in Sources */,
+				8785D7DC15827CA0E7B59475 /* HabitSuggestionHelpers.swift in Sources */,
+				147B9A6A3D96B6A952962B5F /* HabitSuggestionService.swift in Sources */,
 				AB4CD3CCCBD36380454201E7 /* HabitVerifier.swift in Sources */,
 				07D6FB38F86A3B025BE417E2 /* HabitsListView.swift in Sources */,
 				BBAFB47A4B3AAED8F3B3EFF1 /* HealthKitConnector.swift in Sources */,
@@ -903,6 +929,7 @@
 				DF1BB21651EE3228FDAFB7BC /* ChainTests.swift in Sources */,
 				7EC3587796F6EAF14796AC3F /* CompanionEngineTests.swift in Sources */,
 				4A2C44BA420DE21791E21035 /* HabitSchedulerTests.swift in Sources */,
+				7DD2B8EAFFBC05E1647CBE1E /* HabitSuggestionTests.swift in Sources */,
 				0E18E424E0F1BF18F83F726E /* KeychainHelperTests.swift in Sources */,
 				824E1EBFAC7AC22417D8356F /* MCPConnectorTests.swift in Sources */,
 				7851C9C5AC141AE57B4CC4CD /* ManualConnectorTests.swift in Sources */,
@@ -920,6 +947,7 @@
 				318F1AC8343C5602FF6F09A0 /* ChainTests.swift in Sources */,
 				4FAF67E930FE2C400F090C8A /* CompanionEngineTests.swift in Sources */,
 				6FDA8DD44BC684AD24B70FA3 /* HabitSchedulerTests.swift in Sources */,
+				ABA80856E111684AA2F66D22 /* HabitSuggestionTests.swift in Sources */,
 				25EDC1BADD4EF1979121E048 /* KeychainHelperTests.swift in Sources */,
 				A7EAC4F043A7651C976391E7 /* MCPConnectorTests.swift in Sources */,
 				AB34549A84B4B776287E9047 /* ManualConnectorTests.swift in Sources */,
@@ -954,6 +982,8 @@
 				2172722A434DA9B47AC663B0 /* HabitEntry.swift in Sources */,
 				B24A72073858D7B872E6286F /* HabitRowView.swift in Sources */,
 				2966F1D7016AA10CA0C02B2A /* HabitScheduler.swift in Sources */,
+				6C66F189F7C432BF471D537C /* HabitSuggestionHelpers.swift in Sources */,
+				8B0AC5AEDAEC6607FEE5F5AC /* HabitSuggestionService.swift in Sources */,
 				D19035DE2AE04567B7BF699F /* HabitVerifier.swift in Sources */,
 				577614009C90BBA9EDCFF61A /* HabitsListView.swift in Sources */,
 				CBD1E6BFA411417C656314E3 /* HealthKitConnector.swift in Sources */,
@@ -998,6 +1028,7 @@
 				A625ED478461A91B20071B25 /* Habit.swift in Sources */,
 				FD6DA184BF07889762AA7D5F /* HabitEntry.swift in Sources */,
 				81680FAE64D263B34C03F8ED /* HabitScheduler.swift in Sources */,
+				FC41B65EE6E897DC1AF5FEAD /* HabitSuggestionHelpers.swift in Sources */,
 				4C704F1E728C66756EA7B654 /* LockScreenWidgetView.swift in Sources */,
 				D4D160A2F7F922F8AC59E15E /* MediumWidgetView.swift in Sources */,
 				81314A70333BAE667C12E7E0 /* MilestoneChecker.swift in Sources */,
@@ -1027,6 +1058,7 @@
 				9F5F72EB9223B170CB2C3364 /* HabitEntry.swift in Sources */,
 				851EBD0809AA70F05F2C66DD /* HabitRowWatchView.swift in Sources */,
 				8782F06B68B7DC4ADD18336D /* HabitScheduler.swift in Sources */,
+				9DEA2739BB3CEDEEFDADFDFA /* HabitSuggestionHelpers.swift in Sources */,
 				64CC2A1EB0956D56D3744951 /* MilestoneChecker.swift in Sources */,
 				E842D7CB6443317375D5AE88 /* StatsCalculator.swift in Sources */,
 				AA54FD60849F935629986CBF /* StreakCalculator.swift in Sources */,
