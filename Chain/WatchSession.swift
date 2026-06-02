@@ -9,7 +9,10 @@ final class PhoneWatchSession: NSObject, WCSessionDelegate {
     static let shared = PhoneWatchSession()
     private override init() { super.init() }
 
-    func activate() {
+    private var container: ModelContainer?
+
+    func activate(container: ModelContainer) {
+        self.container = container
         guard WCSession.isSupported() else { return }
         WCSession.default.delegate = self
         WCSession.default.activate()
@@ -62,8 +65,8 @@ final class PhoneWatchSession: NSObject, WCSessionDelegate {
         guard dict["action"] as? String == "verify",
               let habitID = dict["habitID"] as? String else { return }
         Task { @MainActor in
-            guard let container = try? ModelContainerFactory.make(inAppGroup: true) else { return }
-            let ctx = ModelContext(container)
+            guard let container else { return }
+            let ctx = container.mainContext
             let habits = (try? ctx.fetch(FetchDescriptor<Habit>())) ?? []
             guard let habit = habits.first(where: { $0.id.uuidString == habitID }) else { return }
             let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())

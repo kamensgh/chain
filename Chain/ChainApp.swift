@@ -23,7 +23,7 @@ struct ChainApp: App {
             fatalError("Failed to create ModelContainer: \(error)")
         }
         #if os(iOS)
-        PhoneWatchSession.shared.activate()
+        PhoneWatchSession.shared.activate(container: container)
         #endif
     }
 
