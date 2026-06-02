@@ -6,6 +6,8 @@ struct AddHabitView: View {
     @Environment(\.dismiss) private var dismiss
 
     var habit: Habit? = nil         // nil = create new, non-nil = edit existing
+    var prefillName: String = ""
+    var prefillEmoji: String = ""
 
     @State private var name = ""
     @State private var emoji = "⭐"
@@ -100,17 +102,21 @@ struct AddHabitView: View {
     }
 
     private func loadExisting() {
-        guard let h = habit else { return }
-        name = h.name
-        emoji = h.emoji
-        frequency = h.frequency
-        goalUnit = h.goalConfig.unit
-        goalTarget = h.goalConfig.targetValue
-        connectorType = h.connectorType
-        gracePeriodEnabled = h.gracePeriodEnabled
-        if let t = h.reminderTime {
-            reminderEnabled = true
-            reminderTime = t
+        if let h = habit {
+            name = h.name
+            emoji = h.emoji
+            frequency = h.frequency
+            goalUnit = h.goalConfig.unit
+            goalTarget = h.goalConfig.targetValue
+            connectorType = h.connectorType
+            gracePeriodEnabled = h.gracePeriodEnabled
+            if let t = h.reminderTime {
+                reminderEnabled = true
+                reminderTime = t
+            }
+        } else {
+            if !prefillName.isEmpty { name = prefillName }
+            if !prefillEmoji.isEmpty { emoji = prefillEmoji }
         }
     }
 
