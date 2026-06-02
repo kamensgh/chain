@@ -64,10 +64,8 @@ struct HabitsListView: View {
         .sheet(isPresented: $showingSuggest) {
             NavigationStack {
                 SuggestHabitsView(existingNames: habits.map(\.name)) { selected in
+                    addPrefill = HabitPrefill(name: selected.name, emoji: selected.emoji)
                     showingSuggest = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        addPrefill = HabitPrefill(name: selected.name, emoji: selected.emoji)
-                    }
                 }
             }
         }

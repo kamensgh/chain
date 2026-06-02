@@ -23,7 +23,8 @@ struct SuggestHabitsView: View {
 
             case .loaded(let suggestions, let offline):
                 List {
-                    ForEach(suggestions, id: \.name) { suggestion in
+                    ForEach(suggestions.indices, id: \.self) { i in
+                        let suggestion = suggestions[i]
                         HStack(spacing: 12) {
                             Text(suggestion.emoji)
                                 .font(.title2)
