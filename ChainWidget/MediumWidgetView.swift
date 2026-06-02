@@ -74,5 +74,6 @@ struct ChainMediumWidget: Widget {
         .configurationDisplayName("Chain Habits")
         .description("Check off habits without opening the app.")
         .supportedFamilies([.systemMedium])
+        .contentMarginsDisabled()
     }
 }
