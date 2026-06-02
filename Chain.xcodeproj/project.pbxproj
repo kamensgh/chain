@@ -68,6 +68,7 @@
 		55BFD08F3CB5F58D615573BA /* MCPConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E600FB907F14047642A5414 /* MCPConnector.swift */; };
 		577614009C90BBA9EDCFF61A /* HabitsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C2E89F7F834BE708096D83 /* HabitsListView.swift */; };
 		57A790F081512D0CD47AF95B /* Companion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110ECCA8B6C6F9836150A8D0 /* Companion.swift */; };
+		5A8D91D3B84E5C8481DEC538 /* SuggestHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E165191BD468A703E7E02 /* SuggestHabitsView.swift */; };
 		5AB658206FFD5DA52BEB083B /* VerifyHabitIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A0B64F5CF1BB8BFC243A5E /* VerifyHabitIntent.swift */; };
 		5EC31D61308280E974AC25A2 /* HabitRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6BB2EA74ECFF164EA7F790 /* HabitRowView.swift */; };
 		5F91784D265F1386A4A098EB /* CompanionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22E3849012BC2D9194F8EB3A /* CompanionCardView.swift */; };
@@ -114,6 +115,7 @@
 		911900E51656976106AB2581 /* WatchPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBED8C7ED3F28BB48B2E19A /* WatchPayloadTests.swift */; };
 		9258CB5F900A4C549A213FA4 /* EntryStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CD78469ED48F29028392F3 /* EntryStatus.swift */; };
 		9267FD8F09CFDF88B349E747 /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F6B277E81ED80394B93E1F /* StreakCalculator.swift */; };
+		9477F7C5764BB45A9D78F1C5 /* SuggestHabitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A5E165191BD468A703E7E02 /* SuggestHabitsView.swift */; };
 		9646B28EA2B48948CFBDE2D2 /* MenuBarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FDF2B551EC9208CD7267D7 /* MenuBarPopoverView.swift */; };
 		9A76E1EBF386064AEB3D7D3B /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D86FCC49BE498A02306E92DF /* KeychainHelper.swift */; };
 		9DEA2739BB3CEDEEFDADFDFA /* HabitSuggestionHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2676B759B3DB628426B2A90 /* HabitSuggestionHelpers.swift */; };
@@ -283,6 +285,7 @@
 		45C2E89F7F834BE708096D83 /* HabitsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsListView.swift; sourceTree = "<group>"; };
 		46AD2DDA1C69D9938657A6D1 /* ChainWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = ChainWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		482F7D4C1697B2C905D489C5 /* ChainWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainWidgetBundle.swift; sourceTree = "<group>"; };
+		4A5E165191BD468A703E7E02 /* SuggestHabitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestHabitsView.swift; sourceTree = "<group>"; };
 		4F0377F65B6082DE39D23F20 /* WidgetEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetEntry.swift; sourceTree = "<group>"; };
 		50E2AF026A13B3693E06ECB9 /* ManualConnectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualConnectorTests.swift; sourceTree = "<group>"; };
 		5417324671F4776595B499F1 /* SmallWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallWidgetView.swift; sourceTree = "<group>"; };
@@ -428,6 +431,7 @@
 				2E2D604CE4DD180FA4032D5C /* .gitkeep */,
 				CA2D7E16DE667BEAD2F11886 /* AddHabitView.swift */,
 				45C2E89F7F834BE708096D83 /* HabitsListView.swift */,
+				4A5E165191BD468A703E7E02 /* SuggestHabitsView.swift */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -914,6 +918,7 @@
 				DEC1D84E8388783ACCA0F9B1 /* StatsView.swift in Sources */,
 				9267FD8F09CFDF88B349E747 /* StreakCalculator.swift in Sources */,
 				DA182BCAA8C933356889959A /* StreaksTabView.swift in Sources */,
+				9477F7C5764BB45A9D78F1C5 /* SuggestHabitsView.swift in Sources */,
 				2BF031A66902A8670EDFCC2B /* SummaryTabView.swift in Sources */,
 				2FB65D7279DF644C72404A60 /* TodayView.swift in Sources */,
 				0F4B7B6EEFD66844A0734A3E /* WatchPayload.swift in Sources */,
@@ -1006,6 +1011,7 @@
 				F52ED1DF4017B03D853AA0ED /* StatsView.swift in Sources */,
 				BE8372F3F63BB56CAAB2BA5F /* StreakCalculator.swift in Sources */,
 				3FF0747D37AF0732F0E89777 /* StreaksTabView.swift in Sources */,
+				5A8D91D3B84E5C8481DEC538 /* SuggestHabitsView.swift in Sources */,
 				D53ABC13A997F9D6E25C423A /* SummaryTabView.swift in Sources */,
 				24784AB651DB520BAE6DDD31 /* TodayView.swift in Sources */,
 				F033DF0D8E532CA7229604C5 /* WatchPayload.swift in Sources */,

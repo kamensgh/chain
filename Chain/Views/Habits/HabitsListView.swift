@@ -1,10 +1,23 @@
 import SwiftUI
 import SwiftData
 
+#if os(iOS)
+private struct HabitPrefill: Identifiable {
+    let id = UUID()
+    let name: String
+    let emoji: String
+}
+#endif
+
 struct HabitsListView: View {
     @Query(sort: \Habit.createdAt) private var habits: [Habit]
     @Environment(\.modelContext) private var context
     @State private var showingAdd = false
+
+    #if os(iOS)
+    @State private var showingSuggest = false
+    @State private var addPrefill: HabitPrefill? = nil
+    #endif
 
     var body: some View {
         List {
@@ -35,11 +48,35 @@ struct HabitsListView: View {
             ToolbarItem(placement: .topBarLeading) {
                 EditButton()
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showingSuggest = true
+                } label: {
+                    Label("Suggest", systemImage: "sparkles")
+                }
+            }
             #endif
         }
         .sheet(isPresented: $showingAdd) {
             NavigationStack { AddHabitView() }
         }
+        #if os(iOS)
+        .sheet(isPresented: $showingSuggest) {
+            NavigationStack {
+                SuggestHabitsView(existingNames: habits.map(\.name)) { selected in
+                    showingSuggest = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        addPrefill = HabitPrefill(name: selected.name, emoji: selected.emoji)
+                    }
+                }
+            }
+        }
+        .sheet(item: $addPrefill) { prefill in
+            NavigationStack {
+                AddHabitView(prefillName: prefill.name, prefillEmoji: prefill.emoji)
+            }
+        }
+        #endif
     }
 
     private func delete(at offsets: IndexSet) {
