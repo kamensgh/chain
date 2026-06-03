@@ -126,6 +126,7 @@ struct AddHabitView: View {
             }
         }
         .onAppear(perform: loadExisting)
+        #if os(iOS)
         .navigationDestination(isPresented: $showVerification) {
             VerificationPickerView(
                 connectorType: $connectorType,
@@ -133,6 +134,16 @@ struct AddHabitView: View {
                 onSave: save
             )
         }
+        #else
+        .sheet(isPresented: $showVerification) {
+            VerificationPickerView(
+                connectorType: $connectorType,
+                connectorEndpoint: $connectorEndpoint,
+                onSave: save
+            )
+            .frame(minWidth: 420, minHeight: 480)
+        }
+        #endif
     }
 
     private func loadExisting() {
