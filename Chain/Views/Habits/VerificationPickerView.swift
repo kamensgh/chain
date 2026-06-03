@@ -38,7 +38,10 @@ struct VerificationPickerView: View {
     private var isMCPSelected: Bool { cardChoice == .mcp }
 
     private var saveDisabled: Bool {
-        isMCPSelected && URL(string: connectorEndpoint) == nil
+        isMCPSelected && (
+            connectorEndpoint.trimmingCharacters(in: .whitespaces).isEmpty ||
+            URL(string: connectorEndpoint) == nil
+        )
     }
 
     var body: some View {
@@ -153,11 +156,15 @@ struct VerificationPickerView: View {
     private func syncFromBinding() {
         switch connectorType {
         case .manual:           cardChoice = .manual
-        case .screenshot:       cardChoice = .screenshot
         case .mcp:              cardChoice = .mcp
         case .healthKitSteps:   cardChoice = .health; healthDataType = .steps
         case .healthKitWorkout: cardChoice = .health; healthDataType = .workout
         case .healthKitSleep:   cardChoice = .health; healthDataType = .sleep
+        #if os(iOS)
+        case .screenshot:       cardChoice = .screenshot
+        #else
+        case .screenshot:       cardChoice = .manual
+        #endif
         }
     }
 
