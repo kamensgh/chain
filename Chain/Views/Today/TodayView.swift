@@ -101,6 +101,7 @@ struct TodayView: View {
                         .background(Color.accentColor, in: Circle())
                         .shadow(color: Color.accentColor.opacity(0.4), radius: 12, y: 4)
                 }
+                .buttonStyle(.plain)
                 .padding(.trailing, 20)
                 .padding(.bottom, 20)
             }
