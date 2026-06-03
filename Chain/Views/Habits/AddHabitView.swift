@@ -5,7 +5,7 @@ struct AddHabitView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
 
-    var habit: Habit? = nil         // nil = create new, non-nil = edit existing
+    var habit: Habit? = nil
 
     @State private var name: String
     @State private var emoji: String
@@ -18,6 +18,7 @@ struct AddHabitView: View {
     @State private var reminderTime = Calendar.current.date(
         bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
     @State private var gracePeriodEnabled = false
+    @State private var showVerification = false
 
     init(prefillName: String = "", prefillEmoji: String = "⭐") {
         _name = State(initialValue: prefillName)
@@ -37,6 +38,10 @@ struct AddHabitView: View {
         _reminderEnabled = State(initialValue: habit.reminderTime != nil)
         _reminderTime = State(initialValue: habit.reminderTime ?? Calendar.current.date(
             bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date())
+    }
+
+    private var nameIsEmpty: Bool {
+        name.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
     var body: some View {
@@ -80,22 +85,6 @@ struct AddHabitView: View {
                 }
             }
 
-            Section("Verification") {
-                Picker("Connect to", selection: $connectorType) {
-                    ForEach(ConnectorType.allCases, id: \.self) { type in
-                        Text(type.displayName).tag(type)
-                    }
-                }
-                if connectorType == .mcp {
-                    TextField("https://example.com/verify", text: $connectorEndpoint)
-                        #if os(iOS)
-                        .keyboardType(.URL)
-                        .textInputAutocapitalization(.never)
-                        #endif
-                        .autocorrectionDisabled()
-                }
-            }
-
             Section("Reminder") {
                 Toggle("Daily reminder", isOn: $reminderEnabled)
                 if reminderEnabled {
@@ -111,6 +100,21 @@ struct AddHabitView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+
+            Section {
+                Button {
+                    showVerification = true
+                } label: {
+                    HStack {
+                        Text(habit == nil ? "Continue →" : "Change verification")
+                        Spacer()
+                        Text(connectorType.displayName)
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline)
+                    }
+                }
+                .disabled(nameIsEmpty)
+            }
         }
         .navigationTitle(habit == nil ? "New Habit" : "Edit Habit")
         #if os(iOS)
@@ -120,28 +124,30 @@ struct AddHabitView: View {
             ToolbarItem(placement: .cancellationAction) {
                 Button("Cancel") { dismiss() }
             }
-            ToolbarItem(placement: .confirmationAction) {
-                Button("Save", action: save)
-                    .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty ||
-                              (connectorType == .mcp && URL(string: connectorEndpoint) == nil))
-            }
         }
         .onAppear(perform: loadExisting)
+        .navigationDestination(isPresented: $showVerification) {
+            VerificationPickerView(
+                connectorType: $connectorType,
+                connectorEndpoint: $connectorEndpoint,
+                onSave: save
+            )
+        }
     }
 
     private func loadExisting() {
-        if let h = habit {
-            name = h.name
-            emoji = h.emoji
-            frequency = h.frequency
-            goalUnit = h.goalConfig.unit
-            goalTarget = h.goalConfig.targetValue
-            connectorType = h.connectorType
-            gracePeriodEnabled = h.gracePeriodEnabled
-            if let t = h.reminderTime {
-                reminderEnabled = true
-                reminderTime = t
-            }
+        guard let h = habit else { return }
+        name = h.name
+        emoji = h.emoji
+        frequency = h.frequency
+        goalUnit = h.goalConfig.unit
+        goalTarget = h.goalConfig.targetValue
+        connectorType = h.connectorType
+        connectorEndpoint = h.connectorEndpoint ?? ""
+        gracePeriodEnabled = h.gracePeriodEnabled
+        if let t = h.reminderTime {
+            reminderEnabled = true
+            reminderTime = t
         }
     }
 
