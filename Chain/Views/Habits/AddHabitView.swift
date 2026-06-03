@@ -116,6 +116,7 @@ struct AddHabitView: View {
                 .disabled(nameIsEmpty)
             }
         }
+        .formStyle(.grouped)
         .navigationTitle(habit == nil ? "New Habit" : "Edit Habit")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)

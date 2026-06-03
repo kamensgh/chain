@@ -124,7 +124,11 @@ struct TodayView: View {
             #endif
         }
         .sheet(isPresented: $showingAddHabit) {
+            #if os(iOS)
             NavigationStack { AddHabitView() }
+            #else
+            AddHabitView()
+            #endif
         }
     }
 

@@ -48,7 +48,11 @@ struct HabitsListView: View {
             #endif
         }
         .sheet(isPresented: $showingAdd) {
+            #if os(iOS)
             NavigationStack { AddHabitView() }
+            #else
+            AddHabitView()
+            #endif
         }
         #if os(iOS)
         .sheet(isPresented: $showingSuggest, onDismiss: {
