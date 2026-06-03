@@ -36,7 +36,7 @@ struct MilestoneOverlayView: View {
                             y: animating ? geo.size.height + 60 : -60
                         )
                         .animation(
-                            .easeIn(duration: 1.8).delay(particles[i].delay),
+                            .easeOut(duration: 1.8).delay(particles[i].delay),
                             value: animating
                         )
                 }
@@ -62,12 +62,10 @@ struct MilestoneOverlayView: View {
             .padding(28)
             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 24))
         }
-        .onAppear {
-            animating = true
-            Task {
-                try? await Task.sleep(for: .seconds(3))
-                onDismiss()
-            }
+        .onAppear { animating = true }
+        .task {
+            try? await Task.sleep(for: .seconds(3))
+            onDismiss()
         }
     }
 }

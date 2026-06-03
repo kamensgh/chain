@@ -37,10 +37,7 @@ private struct HabitCalendarView: View {
     }
 
     private func cellColor(for day: Date) -> Color {
-        let period = habit.frequency.periodStart(for: day)
-        // Only color cells that align with a period start for this frequency.
-        // For daily habits every day qualifies. For weekly, only week-start days.
-        guard period == day else { return .clear }
+        let period = HabitScheduler.periodStart(for: habit.frequency, on: day)
         let isVerified = habit.entries.contains {
             $0.periodStart == period && $0.status == .verified
         }

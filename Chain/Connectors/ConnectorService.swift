@@ -21,7 +21,7 @@ final class ConnectorService {
     private func makeConnector(for habit: Habit) -> (any HabitConnector)? {
         switch habit.connectorType {
         case .manual:
-            return ManualConnector()
+            return nil
         case .screenshot:
             return nil  // Screenshot-type habits are verified through ScreenshotPickerView, not here
         case .mcp:
@@ -30,11 +30,23 @@ final class ConnectorService {
             let credential = KeychainHelper.load(for: habit.id.uuidString)
             return MCPConnector(endpoint: url, credential: credential)
         case .healthKitSteps:
+            #if os(iOS)
             return HealthKitConnector(store: HKHealthStore(), dataType: .steps)
+            #else
+            return nil
+            #endif
         case .healthKitWorkout:
+            #if os(iOS)
             return HealthKitConnector(store: HKHealthStore(), dataType: .workoutMinutes)
+            #else
+            return nil
+            #endif
         case .healthKitSleep:
+            #if os(iOS)
             return HealthKitConnector(store: HKHealthStore(), dataType: .sleepHours)
+            #else
+            return nil
+            #endif
         }
     }
 

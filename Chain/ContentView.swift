@@ -25,7 +25,7 @@ struct ContentView: View {
         } detail: {
             TodayView()
         }
-        .fullScreenCover(isPresented: .init(
+        .sheet(isPresented: .init(
             get: { !hasCompletedOnboarding },
             set: { _ in }
         )) {

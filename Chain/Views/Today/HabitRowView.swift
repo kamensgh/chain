@@ -87,7 +87,7 @@ struct HabitRowView: View {
             } else {
                 Button {
                     onVerify()
-                    checkMilestone()
+                    checkMilestoneAfterVerify()
                 } label: {
                     Image(systemName: "circle")
                         .font(.title2)
@@ -101,7 +101,7 @@ struct HabitRowView: View {
         .sheet(isPresented: $showingScreenshotPicker) {
             ScreenshotPickerView(habit: habit)
         }
-        .fullScreenCover(item: $milestoneCelebration) { celebration in
+        .sheet(item: $milestoneCelebration) { celebration in
             MilestoneOverlayView(habit: celebration.habit, streak: celebration.streak) {
                 milestoneCelebration = nil
             }
@@ -123,8 +123,18 @@ struct HabitRowView: View {
         }
     }
 
-    private func checkMilestone() {
-        guard let milestone = MilestoneChecker.milestone(for: currentStreak) else { return }
+    private func checkMilestoneAfterVerify() {
+        // Recompute streak from the updated entries (model write is synchronous)
+        let streakEntries = habit.entries.map {
+            StreakEntry(periodStart: $0.periodStart, status: $0.status)
+        }
+        let newStreak = StreakCalculator.current(
+            entries: streakEntries,
+            frequency: habit.frequency,
+            today: Date(),
+            gracePeriod: habit.gracePeriodEnabled
+        )
+        guard let milestone = MilestoneChecker.milestone(for: newStreak) else { return }
         milestoneCelebration = MilestoneCelebration(habit: habit, streak: milestone)
         Task { await NotificationScheduler.scheduleMilestone(for: habit, streak: milestone) }
     }

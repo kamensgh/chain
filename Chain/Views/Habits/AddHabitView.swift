@@ -13,15 +13,30 @@ struct AddHabitView: View {
     @State private var goalUnit: GoalUnit = .boolean
     @State private var goalTarget: Double = 0
     @State private var connectorType: ConnectorType = .manual
+    @State private var connectorEndpoint: String = ""
     @State private var reminderEnabled = false
     @State private var reminderTime = Calendar.current.date(
         bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date()
     @State private var gracePeriodEnabled = false
 
-    // Only use when creating a new habit (habit == nil); loadExisting() overwrites these if habit is set.
     init(prefillName: String = "", prefillEmoji: String = "⭐") {
         _name = State(initialValue: prefillName)
         _emoji = State(initialValue: prefillEmoji)
+    }
+
+    init(habit: Habit) {
+        self.habit = habit
+        _name = State(initialValue: habit.name)
+        _emoji = State(initialValue: habit.emoji)
+        _frequency = State(initialValue: habit.frequency)
+        _goalUnit = State(initialValue: habit.goalConfig.unit)
+        _goalTarget = State(initialValue: habit.goalConfig.targetValue)
+        _connectorType = State(initialValue: habit.connectorType)
+        _connectorEndpoint = State(initialValue: habit.connectorEndpoint ?? "")
+        _gracePeriodEnabled = State(initialValue: habit.gracePeriodEnabled)
+        _reminderEnabled = State(initialValue: habit.reminderTime != nil)
+        _reminderTime = State(initialValue: habit.reminderTime ?? Calendar.current.date(
+            bySettingHour: 9, minute: 0, second: 0, of: Date()) ?? Date())
     }
 
     var body: some View {
@@ -71,6 +86,14 @@ struct AddHabitView: View {
                         Text(type.displayName).tag(type)
                     }
                 }
+                if connectorType == .mcp {
+                    TextField("https://example.com/verify", text: $connectorEndpoint)
+                        #if os(iOS)
+                        .keyboardType(.URL)
+                        .textInputAutocapitalization(.never)
+                        #endif
+                        .autocorrectionDisabled()
+                }
             }
 
             Section("Reminder") {
@@ -99,7 +122,8 @@ struct AddHabitView: View {
             }
             ToolbarItem(placement: .confirmationAction) {
                 Button("Save", action: save)
-                    .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty ||
+                              (connectorType == .mcp && URL(string: connectorEndpoint) == nil))
             }
         }
         .onAppear(perform: loadExisting)
@@ -130,12 +154,14 @@ struct AddHabitView: View {
             h.frequency = frequency
             h.goalConfig = goal
             h.connectorType = connectorType
+            h.connectorEndpoint = connectorType == .mcp ? connectorEndpoint : nil
             h.gracePeriodEnabled = gracePeriodEnabled
             h.reminderTime = reminderEnabled ? reminderTime : nil
             Task { await NotificationScheduler.schedule(for: h) }
         } else {
             let h = Habit(name: trimmedName, emoji: emoji, frequency: frequency, goalConfig: goal)
             h.connectorType = connectorType
+            h.connectorEndpoint = connectorType == .mcp ? connectorEndpoint : nil
             h.gracePeriodEnabled = gracePeriodEnabled
             h.reminderTime = reminderEnabled ? reminderTime : nil
             context.insert(h)

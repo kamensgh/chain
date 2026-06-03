@@ -23,18 +23,7 @@ struct HabitsListView: View {
     var body: some View {
         List {
             ForEach(habits) { habit in
-                NavigationLink(destination: AddHabitView(habit: habit)) {
-                    HStack(spacing: 10) {
-                        Text(habit.emoji).font(.title3)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(habit.name).font(.subheadline.weight(.medium))
-                            Text(habit.frequency.rawValue.capitalized + " · " + habit.connectorType.displayName)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    .padding(.vertical, 2)
-                }
+                habitRow(habit)
             }
             .onDelete(perform: delete)
         }
@@ -80,6 +69,30 @@ struct HabitsListView: View {
             }
         }
         #endif
+    }
+
+    @ViewBuilder
+    private func habitRow(_ habit: Habit) -> some View {
+        NavigationLink(destination: AddHabitView(habit: habit)) {
+            HStack(spacing: 10) {
+                Text(habit.emoji).font(.title3)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(habit.name).font(.subheadline.weight(.medium))
+                    Text(habit.frequency.rawValue.capitalized + " · " + habit.connectorType.displayName)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .padding(.vertical, 2)
+        }
+        .contextMenu {
+            Button(role: .destructive) {
+                context.delete(habit)
+                try? context.save()
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
     }
 
     private func delete(at offsets: IndexSet) {

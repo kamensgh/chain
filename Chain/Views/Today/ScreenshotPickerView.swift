@@ -9,6 +9,7 @@ struct ScreenshotPickerView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var selectedItem: PhotosPickerItem?
     @State private var isSaving = false
+    @State private var showingError = false
 
     var body: some View {
         NavigationStack {
@@ -53,11 +54,19 @@ struct ScreenshotPickerView: View {
                 isSaving = false
             }
         }
+        .alert("Couldn't save photo", isPresented: $showingError) {
+            Button("OK") { }
+        } message: {
+            Text("Please try again or choose a different photo.")
+        }
     }
 
     @MainActor
     private func saveScreenshot(from item: PhotosPickerItem) async {
-        guard let data = try? await item.loadTransferable(type: Data.self) else { return }
+        guard let data = try? await item.loadTransferable(type: Data.self) else {
+            showingError = true
+            return
+        }
 
         let screenshotsDir = FileManager.default
             .urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -66,7 +75,10 @@ struct ScreenshotPickerView: View {
 
         let filename = "\(UUID().uuidString).jpg"
         let fileURL = screenshotsDir.appendingPathComponent(filename)
-        guard (try? data.write(to: fileURL)) != nil else { return }
+        guard (try? data.write(to: fileURL)) != nil else {
+            showingError = true
+            return
+        }
 
         let period = HabitScheduler.periodStart(for: habit.frequency, on: Date())
         if let existing = habit.entries.first(where: { $0.periodStart == period }) {

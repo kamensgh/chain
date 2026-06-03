@@ -11,8 +11,7 @@ enum SmartNotificationScheduler {
         let center = UNUserNotificationCenter.current()
         let settings = await center.notificationSettings()
         guard settings.authorizationStatus == .authorized ||
-              settings.authorizationStatus == .provisional ||
-              settings.authorizationStatus == .ephemeral else { return }
+              settings.authorizationStatus == .provisional else { return }
         guard !habits.isEmpty else { return }
 
         let allVerified = habits.allSatisfy { habit in

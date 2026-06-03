@@ -11,9 +11,17 @@ struct OnboardingView: View {
     var body: some View {
         switch step {
         case .welcome:
+            #if os(iOS)
             WelcomeStepView { step = .permissions }
+            #else
+            WelcomeStepView { step = .firstHabit }
+            #endif
         case .permissions:
+            #if os(iOS)
             PermissionsStepView { step = .firstHabit }
+            #else
+            FirstHabitStepView(onComplete: onComplete)
+            #endif
         case .firstHabit:
             FirstHabitStepView(onComplete: onComplete)
         }
