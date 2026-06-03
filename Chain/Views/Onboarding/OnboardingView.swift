@@ -23,8 +23,6 @@ struct OnboardingView: View {
         case .permissions:
             #if os(iOS)
             PermissionsStepView { step = .firstHabit }
-            #else
-            FirstHabitStepView(onComplete: onComplete)
             #endif
         case .firstHabit:
             FirstHabitStepView(onComplete: onComplete)
