@@ -1,7 +1,7 @@
 import SwiftUI
 
 enum OnboardingStep {
-    case welcome, permissions, firstHabit
+    case welcome, featureTour, companionPick, permissions, firstHabit
 }
 
 struct OnboardingView: View {
@@ -11,10 +11,14 @@ struct OnboardingView: View {
     var body: some View {
         switch step {
         case .welcome:
+            WelcomeStepView { step = .featureTour }
+        case .featureTour:
+            FeaturesTourStepView { step = .companionPick }
+        case .companionPick:
             #if os(iOS)
-            WelcomeStepView { step = .permissions }
+            CompanionPickerStepView { step = .permissions }
             #else
-            WelcomeStepView { step = .firstHabit }
+            CompanionPickerStepView { step = .firstHabit }
             #endif
         case .permissions:
             #if os(iOS)
